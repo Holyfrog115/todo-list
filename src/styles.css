@@ -63,7 +63,9 @@ h1, h2, h3, h4, h5, h6 {
 :root {
     --main-clr: #FFFFFF;
     --secondary-clr: #F4F4F5;
+    --secondary-clr-dark: #A1A1AA;
     --third-clr: #4F46E5;
+    --third-clr-hover: #423cc0;
     --third-clr-transparent: #4F46E50F;
     --high-priority: #EF4444;
     --high-priority-bg: #EF444414;
@@ -72,11 +74,12 @@ h1, h2, h3, h4, h5, h6 {
     --low-priority: #10B981;
     --low-priority-bg: #10B98114;
     --stroke-clr: #E4E4E7;
-    --subtext-clr: #A1A1AA;
 }
 
 body {
     font-family: Geist, Arial, Helvetica, sans-serif;
+    display: grid;
+    grid-template-columns: 350px 1fr;
 }
 
 #sidebar {
@@ -112,7 +115,9 @@ nav li {
     font-weight: 500;
     font-size: 14px;
     padding: 10px;
-    border-radius: 8px;;
+    border-radius: 8px;
+    user-select: none;
+    cursor: pointer;
 }
 
 nav li:hover {
@@ -126,7 +131,7 @@ nav li:hover .tasks-counter {
 }
 
 .tasks-counter {
-    color: var(--subtext-clr);
+    color: var(--secondary-clr-dark);
     justify-self: end;
 }
 
@@ -147,8 +152,8 @@ nav ul {
     display: flex;
     align-items: center;
     gap: 4px;
-    color: var(--subtext-clr);
-    fill: var(--subtext-clr);
+    color: var(--secondary-clr-dark);
+    fill: var(--secondary-clr-dark);
     margin-bottom: 12px;
 }
 
@@ -159,8 +164,51 @@ nav ul {
 
 .projects-heading h2 {
     font-size: 16px;
+    user-select: none;
 }
 
 #projects-tree nav {
     margin-left: 16px;
+}
+
+#top-bar {
+    padding: 16px 32px;
+    border-bottom: 1px solid var(--stroke-clr);
+    display: flex;
+    justify-content: space-between;
+}
+
+input[type="search"] {
+    background-color: var(--secondary-clr);
+    color: var(--secondary-clr-dark);
+    border: 1px solid var(--secondary-clr-dark);
+    border-radius: 4px;
+    height: 35px;
+    width: 400px;
+    font-size: 14px;
+    background: url(imgs/search-icon.svg) no-repeat;
+    background-position: 8px 5px;
+    padding-left: 40px;
+}
+
+#add-task {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 115px;
+    gap: 8px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: var(--third-clr);
+    color: var(--main-clr);
+    fill: var(--main-clr);
+    font-weight: 500;
+    user-select: none;
+}
+
+#add-task:hover {
+    background-color: var(--third-clr-hover);
+    cursor: pointer;
 }
