@@ -1,4 +1,4 @@
-import TodoFolder from "./todo-folder";
+import TodoFolder from "./todo-folder.js";
 
 class ProjectsData {
     constructor() {

@@ -1,5 +1,5 @@
 import "./styles.css";
-import ProjectsData from "./projects-data";
+import ProjectsData from "./projects-data.js";
 import loadMain from "./load-page.js";
 
 
