@@ -1,0 +1,166 @@
+/* CSS RESET START */
+
+
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+*:not(dialog) {
+  margin: 0;
+}
+
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  /* 4. Increase line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 6. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 7. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 8. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/*
+  10. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+
+
+/* CSS RESET END */
+
+
+:root {
+    --main-clr: #FFFFFF;
+    --secondary-clr: #F4F4F5;
+    --third-clr: #4F46E5;
+    --third-clr-transparent: #4F46E50F;
+    --high-priority: #EF4444;
+    --high-priority-bg: #EF444414;
+    --medium-priority: #F59E0B;
+    --medium-priority-bg: #F59E0B14;
+    --low-priority: #10B981;
+    --low-priority-bg: #10B98114;
+    --stroke-clr: #E4E4E7;
+    --subtext-clr: #A1A1AA;
+}
+
+body {
+    font-family: Geist, Arial, Helvetica, sans-serif;
+}
+
+#sidebar {
+    background-color: var(--secondary-clr);
+    height: 100vh;
+    width: 350px;
+    border-right: 1px solid var(--stroke-clr);
+    padding: 16px 20px;
+}
+
+#brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#brand h1 {
+    font-size: 24px;
+}
+
+#brand svg {
+    padding: 4px;
+    background-color: var(--third-clr);
+    fill: var(--main-clr);
+    border-radius: 4px;
+}
+
+nav li {
+    display: grid;
+    grid-template-columns: 28px 1fr 40px;
+    list-style: none;
+    align-items: center;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 8px;;
+}
+
+nav li:hover {
+    background-color: var(--third-clr-transparent);
+    color: var(--third-clr);
+    fill: var(--third-clr);
+}
+
+nav li:hover .tasks-counter {
+    color: var(--third-clr);
+}
+
+.tasks-counter {
+    color: var(--subtext-clr);
+    justify-self: end;
+}
+
+li svg {
+    height: 20px;
+    width: 20px;
+}
+
+nav ul {
+    padding: 0;
+}
+
+#navigation-main {
+    margin: 24px 0;
+}
+
+.projects-heading {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--subtext-clr);
+    fill: var(--subtext-clr);
+    margin-bottom: 12px;
+}
+
+.projects-heading svg {
+    height: 22px;
+    width: 22px;
+}
+
+.projects-heading h2 {
+    font-size: 16px;
+}
+
+#projects-tree nav {
+    margin-left: 16px;
+}
