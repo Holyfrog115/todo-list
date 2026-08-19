@@ -1,6 +1,6 @@
-import todoItem from "./todo-item";
+import TodoItem from "./todo-item";
 
-class todoFolder {
+class TodoFolder {
     constructor(title) {
         this.title = title;
         this.pendingTodos = [];
@@ -18,4 +18,4 @@ class todoFolder {
     }
 }
 
-export default todoFolder;
+export default TodoFolder;

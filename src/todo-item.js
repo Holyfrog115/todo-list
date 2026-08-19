@@ -16,7 +16,7 @@ class CheckListItem {
 }
 
 
-class todoItem {
+class TodoItem {
     #isCompleted;
 
     constructor(title, description, dueDate, priority) {
@@ -46,4 +46,4 @@ class todoItem {
 } 
 
 
-export default todoItem;
+export default TodoItem;
