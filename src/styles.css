@@ -180,7 +180,6 @@ nav ul {
 }
 
 input[type="search"] {
-    background-color: var(--secondary-clr);
     color: var(--secondary-clr-dark);
     border: 1px solid var(--secondary-clr-dark);
     border-radius: 4px;
