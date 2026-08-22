@@ -2,18 +2,19 @@ import TodoItem from "./todo-item.js";
 
 class TodoFolder {
     #id;
+    #idItem = {};
     constructor(title) {
         this.#id = crypto.randomUUID();
         this.title = title;
-        this.pendingTodos = [];
-        this.completedTodos = [];
+        this.todosList = [];
         this.todosAmount = 0;
     }
 
     addItem(title, description, dueDate, priority) {
         const item = new TodoItem(title, description, dueDate, priority);
-        this.pendingTodos.push(item);
+        this.todosList.push(item);
         this.todosAmount++;
+        this.#idItem[item.id] = item;
     }
 
     deleteItem(id) {
@@ -22,6 +23,10 @@ class TodoFolder {
 
     get id() {
         return this.#id;
+    }
+
+    getItem(id) {
+        return this.#idItem[id];
     }
 }
 

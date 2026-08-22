@@ -354,7 +354,7 @@ input[type="search"] {
     font-family: "Geist mono";
 }
 
-.group-name {
+.project-name {
     color: var(--secondary-clr-dark);
 }
 
@@ -366,7 +366,7 @@ input[type="search"] {
     text-decoration: line-through;
 }
 
-.todo-data .group-name::after {
+.todo-data .project-name::after {
     content: "\2022";
     margin: 0 4px;
     color: var(--secondary-clr-dark);
