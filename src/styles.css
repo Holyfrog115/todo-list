@@ -164,6 +164,30 @@ nav ul {
     width: 22px;
 }
 
+#hide-projects {
+    background-color: transparent;
+    border: none;
+    height: 30px;
+    width: 30px;
+    padding: 0;
+}
+
+#down-arrow {
+    display: block;
+}
+
+#right-arrow {
+    display: none;
+}
+
+.hidden #down-arrow {
+    display: none;
+}
+
+.hidden #right-arrow {
+    display: block;
+}
+
 #hide-projects:hover {
     cursor: pointer;
 }

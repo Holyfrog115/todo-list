@@ -6,6 +6,12 @@ function loadLogic(projectsData) {
 
 
 function loadSidebarLogic(projectsData) {
+    loadNewProjectForm(projectsData);
+    loadHideButton(projectsData);
+}
+
+
+function loadNewProjectForm(projectsData) {
     const addProjectBtn = document.querySelector("#new-project");
     const newProjectDialog = document.querySelector("#new-project-dialog");
     const newProjectForm = document.querySelector("#new-project-form");
@@ -35,6 +41,22 @@ function loadSidebarLogic(projectsData) {
         newProjectForm.reset();
         projectsData.createProject(projectTitle);
         loadSidebar(projectsData);
+    });
+}
+
+function loadHideButton(projectsData) {
+    const hideBtn = document.querySelector("#hide-projects");
+
+    hideBtn.addEventListener("click", () => {
+        hideBtn.classList.toggle("hidden");
+
+        if (hideBtn.classList.contains("hidden")) {
+            const ul = document.querySelector("#projects-list");
+            ul.replaceChildren();
+        }
+        else {
+            loadSidebar(projectsData);
+        }
     });
 }
 
