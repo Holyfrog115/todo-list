@@ -150,7 +150,8 @@ nav ul {
 }
 
 .projects-heading {
-    display: flex;
+    display: grid;
+    grid-template-columns: 22px 1fr 28px;
     align-items: center;
     gap: 4px;
     color: var(--secondary-clr-dark);
@@ -163,9 +164,32 @@ nav ul {
     width: 22px;
 }
 
+#hide-projects:hover {
+    cursor: pointer;
+}
+
 .projects-heading h2 {
     font-size: 16px;
     user-select: none;
+}
+
+#projects-tree {
+    margin-left: 10px;
+}
+
+#new-project {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+    background-color: var(--third-clr);
+    fill: var(--main-clr);
+}
+
+#new-project:hover {
+    background-color: var(--third-clr-hover);
+    cursor: pointer;
 }
 
 #projects-tree nav {
