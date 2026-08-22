@@ -1,7 +1,9 @@
 import TodoItem from "./todo-item.js";
 
 class TodoFolder {
+    #id;
     constructor(title) {
+        this.#id = crypto.randomUUID();
         this.title = title;
         this.pendingTodos = [];
         this.completedTodos = [];
@@ -16,6 +18,10 @@ class TodoFolder {
 
     deleteItem(id) {
         // ...
+    }
+
+    get id() {
+        return this.#id;
     }
 }
 

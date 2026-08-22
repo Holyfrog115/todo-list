@@ -18,8 +18,10 @@ class CheckListItem {
 
 class TodoItem {
     #isCompleted;
+    #id;
 
     constructor(title, description, dueDate, priority) {
+        this.#id = crypto.randomUUID();
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
@@ -42,6 +44,10 @@ class TodoItem {
 
     deleteCheckListItem(id) {
         this.checkList.splice(id, 1);
+    }
+
+    get id() {
+        return this.#id;
     }
 } 
 
