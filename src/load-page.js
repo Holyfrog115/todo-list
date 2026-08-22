@@ -8,9 +8,14 @@ function loadPage(projectsData) {
 function loadSidebar(projectsData) {
     // Loads sidebar
 
+    const inbox = document.querySelector("#navigation-main li:first-of-type");
+    inbox.dataset.id = projectsData.inbox.id;
+    inbox.classList.add("selected-project");
     const inboxCounter = document.querySelector("#inbox-tasks-counter");
     inboxCounter.textContent = projectsData.inbox.todosAmount;
 
+    const today = document.querySelector("#navigation-main li:last-of-type");
+    today.dataset.id = projectsData.today.id;
     const todayCounter = document.querySelector("#today-tasks-counter");
     todayCounter.textContent = projectsData.today.todosAmount;
 
@@ -30,6 +35,7 @@ function loadSidebar(projectsData) {
         tasksCounter.classList.add("tasks-counter");
 
         listItem.append(folderName, tasksCounter);
+        listItem.dataset.id = project.id;
         ul.appendChild(listItem);
     }
 }
@@ -38,6 +44,7 @@ function loadSidebar(projectsData) {
 function loadTasksSection() {
     // Loads Main content with tasks
 
+    
 }
 
 
@@ -47,5 +54,4 @@ function loadTaskDetails() {
 }
 
 
-export { loadSidebar, loadTasksSection, loadTaskDetails };
 export default loadPage;

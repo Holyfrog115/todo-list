@@ -10,7 +10,7 @@ class Main {
         const projectsData = new ProjectsData();
 
         // Test data
-        // projectsData.createProject("Test");
+        projectsData.createProject("Test");
 
         loadPage(projectsData);
         loadLogic(projectsData);

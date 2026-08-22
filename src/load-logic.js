@@ -1,7 +1,10 @@
-import { loadSidebar } from "./load-page.js";
+import { addNewProject } from "./update-page.js";
+
+let hidden = false;
 
 function loadLogic(projectsData) {
     loadSidebarLogic(projectsData);
+    selectProjects(projectsData);
 }
 
 
@@ -40,7 +43,8 @@ function loadNewProjectForm(projectsData) {
 
         newProjectForm.reset();
         projectsData.createProject(projectTitle);
-        loadSidebar(projectsData);
+        addNewProject(projectsData.projects.at(-1), hidden);
+        selectProjects(projectsData);
     });
 }
 
@@ -50,15 +54,29 @@ function loadHideButton(projectsData) {
     hideBtn.addEventListener("click", () => {
         hideBtn.classList.toggle("hidden");
 
-        if (hideBtn.classList.contains("hidden")) {
-            const ul = document.querySelector("#projects-list");
-            ul.replaceChildren();
-        }
-        else {
-            loadSidebar(projectsData);
-        }
+        const toHide = document.querySelectorAll("#projects-tree nav li");
+        toHide.forEach(project => {
+            project.classList.toggle("hidden-project");
+        });
+
+        hidden = !hidden;
     });
 }
 
+
+function selectProjects(projectsData) {
+    const projects = document.querySelectorAll("#sidebar li");
+    projects.forEach(project => {
+        project.addEventListener("click", (event) => {
+            // Removing class from current selected element
+            
+            const selected = document.querySelector(".selected-project");
+            selected.classList.remove("selected-project");
+
+            project.classList.add("selected-project");
+            projectsData.selectedProject = project.dataset.id;
+        });
+    });
+}
 
 export default loadLogic;

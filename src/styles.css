@@ -83,6 +83,10 @@ body {
     grid-template-columns: 350px 1fr;
 }
 
+
+/* Sidebar */
+
+
 #sidebar {
     background-color: var(--secondary-clr);
     height: 100vh;
@@ -219,6 +223,24 @@ nav ul {
 #projects-tree nav {
     margin-left: 16px;
 }
+
+.selected-project {
+    background-color: var(--third-clr-transparent);
+    color: var(--third-clr);
+    fill: var(--third-clr);
+}
+
+.selected-project .tasks-counter {
+    color: var(--third-clr);
+}
+
+.hidden-project {
+    display: none;
+}
+
+
+/* Main Section */
+
 
 #top-bar {
     padding: 16px 32px;
