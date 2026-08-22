@@ -9,8 +9,9 @@ class TodoFolder {
     }
 
     addItem(title, description, dueDate, priority) {
-        const item = new todoItem(title, description, dueDate, priority);
+        const item = new TodoItem(title, description, dueDate, priority);
         this.pendingTodos.push(item);
+        this.todosAmount++;
     }
 
     deleteItem(id) {
