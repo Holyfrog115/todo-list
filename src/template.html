@@ -153,5 +153,19 @@
             </div>
         </div>
     </div>
+
+    <dialog id="new-project-dialog">
+        <form method="dialog" id="new-project-form">
+            <h2>New Project</h2>
+            <fieldset>
+                <label for="projectTitle">Project Title:</label>
+                <input type="text" name="projectTitle" id="projectTitle" autocomplete="off" required minlength="2" maxlength="15">
+            </fieldset>
+            <div class="dialog-buttons">
+                <button type="button" value="cancel" formmethod="dialog">Cancel</button>
+                <button id="confirmBtn" value="default">Add</button>
+            </div>
+        </form>
+    </dialog>
 </body>
 </html>

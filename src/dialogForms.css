@@ -1,0 +1,56 @@
+:root {
+    --main-clr: #FFFFFF;
+    --secondary-clr: #F4F4F5;
+    --secondary-clr-dark: #A1A1AA;
+    --secondary-clr-light: #FAFAFA;
+    --third-clr: #4F46E5;
+    --third-clr-hover: #423cc0;
+    --third-clr-transparent: #4F46E50F;
+    --high-priority: #EF4444;
+    --high-priority-bg: #EF444414;
+    --medium-priority: #F59E0B;
+    --medium-priority-bg: #F59E0B14;
+    --low-priority: #10B981;
+    --low-priority-bg: #10B98114;
+    --stroke-clr: #E4E4E7;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dialog-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+button {
+    background-color: var(--secondary-clr);
+    border: 1px solid var(--secondary-clr-dark);
+    border-radius: 4px;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: var(--stroke-clr);
+}
+
+#confirmBtn {
+    background-color: var(--third-clr);
+    color: var(--main-clr);
+    border: none;
+}
+
+#confirmBtn:hover {
+    background-color: var(--third-clr-hover);
+}
