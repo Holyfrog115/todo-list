@@ -46,6 +46,8 @@ function loadSidebar(projectsData) {
 
 
 function loadInbox(projectsData) {
+    // NEED TO FIX AND ADD SORTING 
+
     let totalItems = 0;
     
     for (const project of projectsData.projects) {
@@ -89,7 +91,6 @@ function loadProject(project) {
     const completedTasks = document.querySelector("#completed-tasks ul")
     completedTasks.replaceChildren();
     
-    project.sortByDueDate();
     for (const item of project.todosList) {
         if (item.isCompleted) {
             addTodoItem(project, item, completedTasks);
