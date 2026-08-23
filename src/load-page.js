@@ -78,6 +78,15 @@ function loadToday(projectsData) {
 function loadProject(project) {
     // Loads Main content with tasks
 
+    if (project.title == "Inbox" || project.title == "Today") {
+        const deleteProjectBtn = document.querySelector("#delete-project");
+        deleteProjectBtn.classList.add("hidden");
+    }
+    else {
+        const deleteProjectBtn = document.querySelector("#delete-project");
+        deleteProjectBtn.classList.remove("hidden");
+    }
+
     const projectTitle = document.querySelector("#header-block h2");
     projectTitle.textContent = project.title;
 
