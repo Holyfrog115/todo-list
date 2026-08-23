@@ -15,7 +15,7 @@ class Main {
 
         projectsData.selectedProject.addItem("Example 1", "Example 1 description", new Date(), 3);
         projectsData.selectedProject.addItem("Example 2", "Example 2 description", new Date(2014, 4, 14), 1);
-        projectsData.selectedProject.todosList[1].changeCompletionStatus();
+        // projectsData.selectedProject.todosList[1].changeCompletionStatus();
         // End of test data
 
         loadPage(projectsData);
