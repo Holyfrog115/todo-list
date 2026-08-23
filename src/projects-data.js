@@ -21,6 +21,10 @@ class ProjectsData {
         // ...
     }
 
+    getProject(id) {
+        return this.#idProject[id];
+    }
+
     set selectedProject(id) {
         this.#selectedProject = this.#idProject[id];
     }

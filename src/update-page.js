@@ -22,4 +22,20 @@ function addNewProject(project, hidden) {
 }
 
 
-export { addNewProject };
+function updateSidebarCounters(projectsData) {
+    const inboxCounter = document.querySelector("#inbox-tasks-counter");
+    inboxCounter.textContent = projectsData.inbox.todosAmount;
+
+    const todayCounter = document.querySelector("#today-tasks-counter");
+    todayCounter.textContent = projectsData.today.todosAmount;
+
+
+    const tasksCounters = document.querySelectorAll(".tasks-counter");
+    tasksCounters.forEach(counter => {
+        const projectId = counter.parentElement.dataset.id;
+        counter.textContent = projectsData.getProject(projectId).todosAmount;
+    });
+}
+
+
+export { addNewProject, updateSidebarCounters };

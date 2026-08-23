@@ -26,6 +26,12 @@ fieldset {
     padding: 0;
     display: flex;
     flex-direction: column;
+    gap: 12px;
+}
+
+fieldset > div {
+    display: flex;
+    flex-direction: column;
     gap: 4px;
 }
 
@@ -53,4 +59,13 @@ button:hover {
 
 #confirmBtn:hover {
     background-color: var(--third-clr-hover);
+}
+
+textarea {
+    resize: none;
+    scrollbar-width: thin;
+}
+
+.required {
+    color: var(--high-priority);
 }
