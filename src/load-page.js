@@ -1,12 +1,10 @@
+import { format, isToday, isYesterday, isTomorrow } from "date-fns"; 
+
+
 function loadPage(projectsData) {
     // Loads whole page
 
     loadSidebar(projectsData);
-
-    projectsData.selectedProject.addItem("Example 1", "Example 1 description", "none", 3);
-    projectsData.selectedProject.addItem("Example 2", "Example 2 description", "none", 1);
-    projectsData.selectedProject.todosList[1].changeCompletionStatus();
-
     loadProject(projectsData.selectedProject);
 }
 
@@ -58,6 +56,9 @@ function loadInbox(projectsData) {
 
     const projectTitle = document.querySelector("#header-block h2");
     projectTitle.textContent = projectsData.inbox.title;
+
+    const activeItems = document.querySelector("#active-items");
+    activeItems.textContent = `Showing ${totalItems} active items`;
 }
 
 
@@ -107,6 +108,8 @@ function addTodoItem(project, item, list) {
     if (item.isCompleted) {
         checkBox.checked = true;
     }
+
+    // Task's completion status change
     checkBox.addEventListener("click", (event) => {
         const itemId = event.target.parentElement.parentElement.dataset.id;
         project.getItem(itemId).changeCompletionStatus();
@@ -129,8 +132,26 @@ function addTodoItem(project, item, list) {
 
     const dueDate = document.createElement("div");
     dueDate.classList.add("due-date");
-    // Date to change
-    dueDate.textContent = "Temporary date";
+
+    if (!item.isCompleted) {
+        if (isToday(item.dueDate)) {
+            dueDate.textContent = "Today";
+            dueDate.classList.add("today-date");
+        }
+        else if (isYesterday(item.dueDate)) {
+            dueDate.textContent = "Yesterday";
+        }
+        else if (isTomorrow(item.dueDate)) {
+            dueDate.textContent = "Tomorrow";
+        }
+        else {
+            dueDate.textContent = format(item.dueDate, "MMM d");
+        }
+    }
+    else {
+        dueDate.textContent = format(item.dueDate, "yyyy/MM/dd");
+    }
+    
 
     todoData.append(projectName, dueDate);
     todoContainer.append(taskTitle, todoData);
@@ -178,4 +199,5 @@ function loadTaskDetails() {
 }
 
 
+export { loadProject };
 export default loadPage;

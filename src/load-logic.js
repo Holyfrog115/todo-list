@@ -1,4 +1,5 @@
 import { addNewProject } from "./update-page.js";
+import { loadProject } from "./load-page.js";
 
 let hidden = false;
 
@@ -75,6 +76,7 @@ function selectProjects(projectsData) {
 
             project.classList.add("selected-project");
             projectsData.selectedProject = project.dataset.id;
+            loadProject(projectsData.selectedProject);
         });
     });
 }

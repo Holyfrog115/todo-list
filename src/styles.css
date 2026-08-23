@@ -417,3 +417,7 @@ input[type="search"] {
 .more-btn:hover {
     cursor: pointer;
 }
+
+.today-date {
+    color: var(--third-clr);
+}
