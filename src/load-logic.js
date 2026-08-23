@@ -1,4 +1,4 @@
-import { addNewProject, updateSidebarCounters } from "./update-page.js";
+import { addNewProject, updateSidebarCounters, removeProject } from "./update-page.js";
 import { loadProject } from "./load-page.js";
 
 let hidden = false;
@@ -76,10 +76,20 @@ function selectProjects(projectsData) {
     });
 }
 
+
+function selectInboxProject(projectsData) {
+    const inbox = document.querySelector("#navigation-main li:first-of-type");
+    inbox.classList.add("selected-project");
+    projectsData.selectedProject = inbox.dataset.id;
+    loadProject(projectsData.selectedProject);
+}
+
+
 // Main content
 
 function loadMainContentLogic(projectsData) {
     addTask(projectsData);
+    projectDeletion(projectsData);
 }
 
 
@@ -109,6 +119,17 @@ function addTask(projectsData) {
         projectsData.selectedProject.addItem(taskTitle, taskDescription, taskDueDate, taskPriority);
         loadProject(projectsData.selectedProject);
         updateSidebarCounters(projectsData);
+    });
+}
+
+
+function projectDeletion(projectsData) {
+    const deleteProjectBtn = document.querySelector("#delete-project");
+
+    deleteProjectBtn.addEventListener("click", () => {
+        removeProject(projectsData.selectedProject);
+        projectsData.deleteProject(projectsData.selectedProject.id);
+        selectInboxProject(projectsData);
     });
 }
 
