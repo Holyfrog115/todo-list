@@ -6,7 +6,6 @@ function loadPage(projectsData) {
 
     loadSidebar(projectsData);
     loadProject(projectsData.selectedProject);
-    deselectMoreOptions();
 }
 
 
@@ -230,20 +229,6 @@ function addTodoItem(project, item, list) {
     itemList.append(leftPart, rightPart);
 
     list.appendChild(itemList);
-}
-
-
-function deselectMoreOptions() {
-    // Adds event listener to window object to deselect more options menu after clicking away
-    
-    window.addEventListener("click", (event) => {
-        if (!event.target.matches(".more-btn")) {
-            const dropdowns = document.querySelectorAll(".more-options-menu");
-            dropdowns.forEach(dropdown => {
-                dropdown.classList.remove("visible");
-            });
-        }
-    });
 }
 
 

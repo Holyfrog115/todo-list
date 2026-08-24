@@ -90,6 +90,7 @@ function selectInboxProject(projectsData) {
 function loadMainContentLogic(projectsData) {
     addTask(projectsData);
     projectDeletion(projectsData);
+    deselectMoreOptions();
 }
 
 
@@ -139,5 +140,20 @@ function projectDeletion(projectsData) {
         }
     });
 }
+
+
+function deselectMoreOptions() {
+    // Adds event listener to window object to deselect more options menu after clicking away
+    
+    window.addEventListener("click", (event) => {
+        if (!event.target.matches(".more-btn") && !event.target.matches(".more-options-menu")) {
+            const dropdowns = document.querySelectorAll(".more-options-menu");
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove("visible");
+            });
+        }
+    });
+}
+
 
 export default loadLogic;
