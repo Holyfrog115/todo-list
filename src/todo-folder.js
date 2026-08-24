@@ -38,6 +38,12 @@ class TodoFolder {
     sortByDueDate() {
         this.todosList.sort((a, b) => b.dueDate - a.dueDate);
     }
+
+    emptyTodoList() {
+        this.todosList = [];
+        this.todosAmount = 0;
+        this.#idItem = {};
+    }
 }
 
 export default TodoFolder;

@@ -47,21 +47,22 @@ function loadSidebar(projectsData) {
 
 
 function loadInbox(projectsData) {
-    // NEED TO FIX AND ADD SORTING 
+    // Loads Inbox folder with all todos
 
-    let totalItems = 0;
+    projectsData.inbox.emptyTodoList();
     
     for (const project of projectsData.projects) {
-        totalItems += project.todosAmount;
-
-        loadProject(project);
+        for (const item of project.todosList) {
+            projectsData.inbox.addItem(item.title, item.description, item.dueDate, item.priority);
+        }
     }
 
-    const projectTitle = document.querySelector("#header-block h2");
-    projectTitle.textContent = projectsData.inbox.title;
+    const sidebarTasksCounter = document.querySelector("#inbox-tasks-counter");
+    sidebarTasksCounter.textContent = projectsData.inbox.todosAmount;
+     
+    projectsData.inbox.sortByDueDate();
 
-    const activeItems = document.querySelector("#active-items");
-    activeItems.textContent = `Showing ${totalItems} active items`;
+    loadProject(projectsData.inbox);
 }
 
 
@@ -239,5 +240,5 @@ function loadTaskDetails() {
 }
 
 
-export { loadProject };
+export { loadProject, loadInbox };
 export default loadPage;

@@ -1,5 +1,5 @@
 import { addNewProject, updateSidebarCounters, removeProject, deleteItem } from "./update-page.js";
-import { loadProject } from "./load-page.js";
+import { loadProject, loadInbox } from "./load-page.js";
 
 let hidden = false;
 
@@ -82,7 +82,7 @@ function selectInboxProject(projectsData) {
     const inbox = document.querySelector("#navigation-main li:first-of-type");
     inbox.classList.add("selected-project");
     projectsData.selectedProject = inbox.dataset.id;
-    loadProject(projectsData.selectedProject);
+    loadInbox(projectsData);
     deleteButtons(projectsData);
 }
 
@@ -120,6 +120,7 @@ function addTask(projectsData) {
 
         newTaskForm.reset();
         projectsData.selectedProject.addItem(taskTitle, taskDescription, taskDueDate, taskPriority);
+        projectsData.inbox.addItem(taskTitle, taskDescription, taskDueDate, taskPriority);
         projectsData.selectedProject.sortByDueDate();
         loadProject(projectsData.selectedProject);
         updateSidebarCounters(projectsData);
