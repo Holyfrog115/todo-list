@@ -496,5 +496,5 @@ input[type="search"] {
 }
 
 .more-options-menu .deletion-button:hover {
-    background-color: var(--deletion-bg-hover);
+    background-color: var(--deletion-bg);
 }
