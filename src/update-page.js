@@ -49,4 +49,18 @@ function updateSidebarCounters(projectsData) {
 }
 
 
-export { addNewProject, updateSidebarCounters, removeProject };
+function deleteItem(projectsData, id) {
+    const tasks = document.querySelectorAll(".tasks-block li");
+
+    for (const task of tasks) {
+        if (task.dataset.id == id) {
+            task.remove();
+            const tasksCounter = document.querySelector("#active-items");
+            tasksCounter.textContent = `Showing ${projectsData.selectedProject.todosAmount} active items`
+            break;
+        }
+    }
+}
+
+
+export { addNewProject, updateSidebarCounters, removeProject, deleteItem };

@@ -18,7 +18,13 @@ class TodoFolder {
     }
 
     deleteItem(id) {
-        // ...
+        for (let i = 0; i < this.todosAmount; i++) {
+            if (this.todosList[i].id == id) {
+                this.todosList.splice(i, 1);
+                this.todosAmount--;
+                break;
+            }
+        }
     }
 
     get id() {

@@ -1,4 +1,4 @@
-import { addNewProject, updateSidebarCounters, removeProject } from "./update-page.js";
+import { addNewProject, updateSidebarCounters, removeProject, deleteItem } from "./update-page.js";
 import { loadProject } from "./load-page.js";
 
 let hidden = false;
@@ -72,6 +72,7 @@ function selectProjects(projectsData) {
             project.classList.add("selected-project");
             projectsData.selectedProject = project.dataset.id;
             loadProject(projectsData.selectedProject);
+            deleteButtons(projectsData);
         });
     });
 }
@@ -82,6 +83,7 @@ function selectInboxProject(projectsData) {
     inbox.classList.add("selected-project");
     projectsData.selectedProject = inbox.dataset.id;
     loadProject(projectsData.selectedProject);
+    deleteButtons(projectsData);
 }
 
 
@@ -121,6 +123,7 @@ function addTask(projectsData) {
         projectsData.selectedProject.sortByDueDate();
         loadProject(projectsData.selectedProject);
         updateSidebarCounters(projectsData);
+        deleteButtons(projectsData);
     });
 }
 
@@ -156,4 +159,19 @@ function deselectMoreOptions() {
 }
 
 
+function deleteButtons(projectsData) {
+    // Logic for delete todo item button
+
+    const deletionBtns = document.querySelectorAll(".deletion-button");
+    deletionBtns.forEach(button => {
+        button.addEventListener("click", (event) => {
+            const itemId = event.target.parentElement.parentElement.parentElement.dataset.id;
+            projectsData.selectedProject.deleteItem(itemId);
+            updateSidebarCounters(projectsData);
+            deleteItem(projectsData, itemId);
+        });
+    });
+}
+
+export { selectInboxProject };
 export default loadLogic;

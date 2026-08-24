@@ -1,11 +1,12 @@
 import { format, isToday, isYesterday, isTomorrow } from "date-fns"; 
+import { selectInboxProject } from "./load-logic.js";
 
 
 function loadPage(projectsData) {
     // Loads whole page
 
     loadSidebar(projectsData);
-    loadProject(projectsData.selectedProject);
+    selectInboxProject(projectsData);
 }
 
 
