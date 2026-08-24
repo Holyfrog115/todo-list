@@ -59,7 +59,7 @@ function loadInbox(projectsData) {
 
     const sidebarTasksCounter = document.querySelector("#inbox-tasks-counter");
     sidebarTasksCounter.textContent = projectsData.inbox.todosAmount;
-     
+
     projectsData.inbox.sortByDueDate();
 
     loadProject(projectsData.inbox);
@@ -87,12 +87,16 @@ function loadProject(project) {
     deletionBtn.classList.remove("confirm-deletion");
 
     if (project.title == "Inbox" || project.title == "Today") {
+        const addTaskBtn = document.querySelector("#add-task");
         const deleteProjectBtn = document.querySelector("#delete-project");
         deleteProjectBtn.classList.add("hidden");
+        addTaskBtn.classList.add("hidden");
     }
     else {
+        const addTaskBtn = document.querySelector("#add-task");
         const deleteProjectBtn = document.querySelector("#delete-project");
         deleteProjectBtn.classList.remove("hidden");
+        addTaskBtn.classList.remove("hidden");
     }
 
     const projectTitle = document.querySelector("#header-block h2");

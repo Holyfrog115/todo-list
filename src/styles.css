@@ -316,6 +316,10 @@ input[type="search"] {
     display: none;
 }
 
+#add-task.hidden {
+    display: none;
+}
+
 #tasks-section {
     padding: 16px 32px;
 }
