@@ -1,12 +1,16 @@
 import { addNewProject, updateSidebarCounters, removeProject, deleteItem } from "./update-page.js";
-import { loadProject, loadInbox } from "./load-page.js";
+import { loadProject } from "./load-page.js";
+import { isToday } from "date-fns";
 
 let hidden = false;
 
 function loadLogic(projectsData) {
+    loadInbox(projectsData);
+    loadToday(projectsData);
     loadSidebarLogic(projectsData);
     selectProjects(projectsData);
     loadMainContentLogic(projectsData);
+    selectInboxProject(projectsData);
 }
 
 // Sidebar
@@ -82,7 +86,7 @@ function selectInboxProject(projectsData) {
     const inbox = document.querySelector("#navigation-main li:first-of-type");
     inbox.classList.add("selected-project");
     projectsData.selectedProject = inbox.dataset.id;
-    loadInbox(projectsData);
+    loadProject(projectsData.inbox);
     deleteButtons(projectsData);
 }
 
@@ -119,9 +123,19 @@ function addTask(projectsData) {
         const taskDescription = formData.get("taskDescription");
 
         newTaskForm.reset();
+        // Adding to current project
         projectsData.selectedProject.addItem(taskTitle, taskDescription, taskDueDate, taskPriority);
-        projectsData.inbox.addItem(taskTitle, taskDescription, taskDueDate, taskPriority);
         projectsData.selectedProject.sortByDueDate();
+
+        // Adding to inbox folder
+        projectsData.inbox.addItem(taskTitle, taskDescription, taskDueDate, taskPriority);
+        projectsData.inbox.sortByDueDate();
+
+        // Adding to today folder
+        if (isToday(taskDueDate)) {
+            projectsData.todayaddItem(taskTitle, taskDescription, taskDueDate, taskPriority);
+        }
+
         loadProject(projectsData.selectedProject);
         updateSidebarCounters(projectsData);
         deleteButtons(projectsData);
@@ -174,5 +188,41 @@ function deleteButtons(projectsData) {
     });
 }
 
-export { selectInboxProject };
+
+function loadInbox(projectsData) {
+    // Loads Inbox folder with all todos in memory
+
+    projectsData.inbox.emptyTodoList();
+    
+    for (const project of projectsData.projects) {
+        for (const item of project.todosList) {
+            projectsData.inbox.addItem(item.title, item.description, item.dueDate, item.priority);
+        }
+    }
+
+    const sidebarTasksCounter = document.querySelector("#inbox-tasks-counter");
+    sidebarTasksCounter.textContent = projectsData.inbox.todosAmount;
+
+    projectsData.inbox.sortByDueDate();
+}
+
+
+function loadToday(projectsData) {
+    // Loads Today folder with all todos with today's due date in memory
+    
+    projectsData.today.emptyTodoList();
+
+    for (const project of projectsData.projects) {
+        for (const item of project.todosList) {
+            if (isToday(item.dueDate)) {
+                projectsData.today.addItem(item.title, item.description, item.dueDate, item.priority);
+            }
+        }
+    }
+
+    const sidebarTasksCounter = document.querySelector("#today-tasks-counter");
+    sidebarTasksCounter.textContent = projectsData.today.todosAmount;
+}
+
+
 export default loadLogic;

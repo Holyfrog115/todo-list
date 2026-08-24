@@ -1,12 +1,10 @@
 import { format, isToday, isYesterday, isTomorrow } from "date-fns"; 
-import { selectInboxProject } from "./load-logic.js";
 
 
 function loadPage(projectsData) {
     // Loads whole page
 
     loadSidebar(projectsData);
-    selectInboxProject(projectsData);
 }
 
 
@@ -43,39 +41,6 @@ function loadSidebar(projectsData) {
         listItem.dataset.id = project.id;
         ul.appendChild(listItem);
     }
-}
-
-
-function loadInbox(projectsData) {
-    // Loads Inbox folder with all todos
-
-    projectsData.inbox.emptyTodoList();
-    
-    for (const project of projectsData.projects) {
-        for (const item of project.todosList) {
-            projectsData.inbox.addItem(item.title, item.description, item.dueDate, item.priority);
-        }
-    }
-
-    const sidebarTasksCounter = document.querySelector("#inbox-tasks-counter");
-    sidebarTasksCounter.textContent = projectsData.inbox.todosAmount;
-
-    projectsData.inbox.sortByDueDate();
-
-    loadProject(projectsData.inbox);
-}
-
-
-function loadToday(projectsData) {
-    let totalItems = 0;
-    
-    for (const project of projectsData.projects) {
-        // TODO
-        
-    }
-
-    const projectTitle = document.querySelector("#header-block h2");
-    projectTitle.textContent = projectsData.today.title;
 }
 
 
@@ -244,5 +209,5 @@ function loadTaskDetails() {
 }
 
 
-export { loadProject, loadInbox };
+export { loadProject };
 export default loadPage;
