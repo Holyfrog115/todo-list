@@ -127,9 +127,15 @@ function projectDeletion(projectsData) {
     const deleteProjectBtn = document.querySelector("#delete-project");
 
     deleteProjectBtn.addEventListener("click", () => {
-        removeProject(projectsData.selectedProject);
-        projectsData.deleteProject(projectsData.selectedProject.id);
-        selectInboxProject(projectsData);
+        if (deleteProjectBtn.classList.contains("confirm-deletion")) {
+            removeProject(projectsData.selectedProject);
+            projectsData.deleteProject(projectsData.selectedProject.id);
+            selectInboxProject(projectsData);
+        }
+        else {
+            deleteProjectBtn.classList.add("confirm-deletion");
+            deleteProjectBtn.textContent = "Confirm Deletion";
+        }
     });
 }
 
