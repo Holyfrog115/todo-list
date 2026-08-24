@@ -447,10 +447,54 @@ input[type="search"] {
     border: none;
 }
 
+.more-btn svg {
+    pointer-events: none;
+}
+
 .more-btn:hover {
     cursor: pointer;
 }
 
 .today-date {
     color: var(--third-clr);
+}
+
+.right {
+    position: relative;
+}
+
+.more-options-menu {
+    background-color: var(--third-clr);
+    box-shadow: 0px 0px 10px var(--third-clr-transparent);
+    padding: 8px;
+    border-radius: 8px;
+    position: absolute;
+    top: 40px;
+    right: 0px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    /* gap: 8px; */
+    z-index: 1;
+}
+
+.more-options-menu.visible {
+    display: flex;
+}
+
+.more-options-menu button {
+    font-size: 16px;
+    width: 120px;
+    background-color: transparent;
+    border: none;
+    color: var(--main-clr);
+    height: 35px;
+}
+
+.more-options-menu button:hover {
+    background-color: var(--third-clr-hover);
+}
+
+.more-options-menu .deletion-button:hover {
+    background-color: var(--deletion-bg-hover);
 }

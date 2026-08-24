@@ -6,6 +6,7 @@ function loadPage(projectsData) {
 
     loadSidebar(projectsData);
     loadProject(projectsData.selectedProject);
+    deselectMoreOptions();
 }
 
 
@@ -198,13 +199,51 @@ function addTodoItem(project, item, list) {
     moreBtn.classList.add("more-btn");
     moreBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M240-400q-33 0-56.5-23.5T160-480q0-33 23.5-56.5T240-560q33 0 56.5 23.5T320-480q0 33-23.5 56.5T240-400Zm240 0q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm240 0q-33 0-56.5-23.5T640-480q0-33 23.5-56.5T720-560q33 0 56.5 23.5T800-480q0 33-23.5 56.5T720-400Z"/></svg>`;
 
-    rightPart.append(priority, moreBtn);
+    const moreOptionsMenu = document.createElement("div");
+    moreOptionsMenu.classList.add("more-options-menu");
+
+    const detailsBtn = document.createElement("button");
+    detailsBtn.classList.add("details-button");
+    detailsBtn.textContent = "More Details";
+
+    const deletionBtn = document.createElement("button");
+    deletionBtn.classList.add("deletion-button");
+    deletionBtn.textContent = "Delete Item";
+
+    moreOptionsMenu.append(detailsBtn, deletionBtn);
+
+    moreBtn.addEventListener("click", (event) => {
+        const moreOptions = event.target.parentElement.querySelector(".more-options-menu");
+        const dropdowns = document.querySelectorAll(".more-options-menu");
+        dropdowns.forEach(dropdown => {
+            if (dropdown != moreOptions){
+                dropdown.classList.remove("visible");
+            }
+        });
+        moreOptions.classList.toggle("visible");
+    });
+
+    rightPart.append(priority, moreBtn, moreOptionsMenu);
 
     const itemList = document.createElement("li");
     itemList.dataset.id = item.id;
     itemList.append(leftPart, rightPart);
 
     list.appendChild(itemList);
+}
+
+
+function deselectMoreOptions() {
+    // Adds event listener to window object to deselect more options menu after clicking away
+    
+    window.addEventListener("click", (event) => {
+        if (!event.target.matches(".more-btn")) {
+            const dropdowns = document.querySelectorAll(".more-options-menu");
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove("visible");
+            });
+        }
+    });
 }
 
 
