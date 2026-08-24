@@ -239,4 +239,5 @@ function loadToday(projectsData) {
 }
 
 
+export { deleteButtons };
 export default loadLogic;
