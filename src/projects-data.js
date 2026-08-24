@@ -18,7 +18,12 @@ class ProjectsData {
     }
 
     deleteProject(id) {
-        // ...
+        for (let i = 0; i < this.projects.length; i++) {
+            if (this.projects[i].id == id) {
+                this.projects.splice(i, 1);
+                break;
+            }
+        }
     }
 
     getProject(id) {

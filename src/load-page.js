@@ -80,6 +80,19 @@ function loadToday(projectsData) {
 function loadProject(project) {
     // Loads Main content with tasks
 
+    const deletionBtn = document.querySelector("#delete-project");
+    deletionBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M200-440v-80h560v80H200Z"/></svg> Delete Project`;
+    deletionBtn.classList.remove("confirm-deletion");
+
+    if (project.title == "Inbox" || project.title == "Today") {
+        const deleteProjectBtn = document.querySelector("#delete-project");
+        deleteProjectBtn.classList.add("hidden");
+    }
+    else {
+        const deleteProjectBtn = document.querySelector("#delete-project");
+        deleteProjectBtn.classList.remove("hidden");
+    }
+
     const projectTitle = document.querySelector("#header-block h2");
     projectTitle.textContent = project.title;
 

@@ -75,6 +75,8 @@ h1, h2, h3, h4, h5, h6 {
     --low-priority: #10B981;
     --low-priority-bg: #10B98114;
     --stroke-clr: #E4E4E7;
+    --deletion-bg: #EF4444;
+    --deletion-bg-hover: #dd3e3e;
 }
 
 body {
@@ -247,6 +249,12 @@ nav ul {
     border-bottom: 1px solid var(--stroke-clr);
     display: flex;
     justify-content: space-between;
+    gap: 16px;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 16px;
 }
 
 input[type="search"] {
@@ -261,26 +269,44 @@ input[type="search"] {
     padding-left: 40px;
 }
 
-#add-task {
+#add-task, #delete-project {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 35px;
-    width: 115px;
     gap: 8px;
     border: none;
     border-radius: 4px;
     font-size: 14px;
-    background-color: var(--third-clr);
-    color: var(--main-clr);
-    fill: var(--main-clr);
     font-weight: 500;
     user-select: none;
 }
 
+#add-task {
+    height: 35px;
+    width: 115px;
+    background-color: var(--third-clr);
+    color: var(--main-clr);
+    fill: var(--main-clr);
+}
+
 #add-task:hover {
     background-color: var(--third-clr-hover);
-    cursor: pointer;
+}
+
+#delete-project {
+    height: 35px;
+    width: 150px;
+    background-color: var(--deletion-bg);
+    color: var(--main-clr);
+    fill: var(--main-clr);
+}
+
+#delete-project:hover {
+    background-color: var(--deletion-bg-hover);
+}
+
+#delete-project.hidden {
+    display: none;
 }
 
 #tasks-section {

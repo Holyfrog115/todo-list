@@ -21,6 +21,17 @@ function addNewProject(project, hidden) {
     ul.appendChild(listItem);
 }
 
+function removeProject(project) {
+    const projects = document.querySelectorAll("#projects-tree li");
+
+    projects.forEach(item => {
+        if (item.dataset.id == project.id) {
+            item.remove();
+            return;
+        }
+    });
+}
+
 
 function updateSidebarCounters(projectsData) {
     const inboxCounter = document.querySelector("#inbox-tasks-counter");
@@ -38,4 +49,4 @@ function updateSidebarCounters(projectsData) {
 }
 
 
-export { addNewProject, updateSidebarCounters };
+export { addNewProject, updateSidebarCounters, removeProject };
