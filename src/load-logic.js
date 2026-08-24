@@ -117,9 +117,9 @@ function addTask(projectsData) {
 
         newTaskForm.reset();
         projectsData.selectedProject.addItem(taskTitle, taskDescription, taskDueDate, taskPriority);
+        projectsData.selectedProject.sortByDueDate();
         loadProject(projectsData.selectedProject);
         updateSidebarCounters(projectsData);
-        projectsData.selectedProject.sortByDueDate();
     });
 }
 
