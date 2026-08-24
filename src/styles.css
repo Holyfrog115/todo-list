@@ -137,6 +137,13 @@ nav li:hover .tasks-counter {
     color: var(--third-clr);
 }
 
+.folder-name {
+    width: 195px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .tasks-counter {
     color: var(--secondary-clr-dark);
     justify-self: end;
