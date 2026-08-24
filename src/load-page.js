@@ -44,7 +44,7 @@ function loadSidebar(projectsData) {
 }
 
 
-function loadProject(project) {
+function loadProject(project, projectsData) {
     // Loads Main content with tasks
 
     const deletionBtn = document.querySelector("#delete-project");
@@ -77,15 +77,15 @@ function loadProject(project) {
     
     for (const item of project.todosList) {
         if (item.isCompleted) {
-            addTodoItem(project, item, completedTasks);
+            addTodoItem(project, item, completedTasks, projectsData);
         }
         else {
-            addTodoItem(project, item, pendingTasks);
+            addTodoItem(project, item, pendingTasks, projectsData);
         }
     }
 }
 
-function addTodoItem(project, item, list) {
+function addTodoItem(project, item, list, projectsData) {
     const leftPart = document.createElement("div");
     leftPart.classList.add("left");
 
@@ -98,8 +98,15 @@ function addTodoItem(project, item, list) {
     // Task's completion status change
     checkBox.addEventListener("click", (event) => {
         const itemId = event.target.parentElement.parentElement.dataset.id;
-        project.getItem(itemId).changeCompletionStatus();
-        loadProject(project);
+        const itemFolder = projectsData.getProject(projectsData.inbox.getItem(itemId).projectId);
+
+        itemFolder.getItem(itemId).changeCompletionStatus();
+        projectsData.inbox.getItem(itemId).changeCompletionStatus();
+        if (isToday(itemFolder.getItem(itemId).dueDate)) {
+            projectsData.today.getItem(itemId).changeCompletionStatus();
+        }
+
+        loadProject(project, projectsData);
     });
 
     const todoContainer = document.createElement("div");
@@ -114,7 +121,7 @@ function addTodoItem(project, item, list) {
 
     const projectName = document.createElement("div");
     projectName.classList.add("project-name");
-    projectName.textContent = project.title;
+    projectName.textContent = projectsData.getProject(item.projectId).title;
 
     const dueDate = document.createElement("div");
     dueDate.classList.add("due-date");

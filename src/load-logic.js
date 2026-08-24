@@ -1,6 +1,7 @@
 import { addNewProject, updateSidebarCounters, removeProject, deleteItem } from "./update-page.js";
 import { loadProject } from "./load-page.js";
 import { isToday } from "date-fns";
+import ProjectsData from "./projects-data.js";
 
 let hidden = false;
 
@@ -75,7 +76,7 @@ function selectProjects(projectsData) {
 
             project.classList.add("selected-project");
             projectsData.selectedProject = project.dataset.id;
-            loadProject(projectsData.selectedProject);
+            loadProject(projectsData.selectedProject, projectsData);
             deleteButtons(projectsData);
         });
     });
@@ -86,7 +87,7 @@ function selectInboxProject(projectsData) {
     const inbox = document.querySelector("#navigation-main li:first-of-type");
     inbox.classList.add("selected-project");
     projectsData.selectedProject = inbox.dataset.id;
-    loadProject(projectsData.inbox);
+    loadProject(projectsData.inbox, projectsData);
     deleteButtons(projectsData);
 }
 
@@ -125,18 +126,20 @@ function addTask(projectsData) {
         newTaskForm.reset();
         // Adding to current project
         projectsData.selectedProject.addItem(taskTitle, taskDescription, taskDueDate, taskPriority);
-        projectsData.selectedProject.sortByDueDate();
 
         // Adding to inbox folder
-        projectsData.inbox.addItem(taskTitle, taskDescription, taskDueDate, taskPriority);
-        projectsData.inbox.sortByDueDate();
+        projectsData.inbox.addDetailedItem(projectsData.selectedProject.id, projectsData.selectedProject.todosList.at(-1).id, taskTitle, taskDescription, taskDueDate, taskPriority, [], false);
+        
 
         // Adding to today folder
         if (isToday(taskDueDate)) {
-            projectsData.todayaddItem(taskTitle, taskDescription, taskDueDate, taskPriority);
+            projectsData.today.addDetailedItem(projectsData.selectedProject.id, projectsData.selectedProject.todosList.at(-1).id, taskTitle, taskDescription, taskDueDate, taskPriority, [], false);
         }
 
-        loadProject(projectsData.selectedProject);
+        projectsData.selectedProject.sortByDueDate();
+        projectsData.inbox.sortByDueDate();
+
+        loadProject(projectsData.selectedProject, projectsData);
         updateSidebarCounters(projectsData);
         deleteButtons(projectsData);
     });
@@ -150,6 +153,8 @@ function projectDeletion(projectsData) {
         if (deleteProjectBtn.classList.contains("confirm-deletion")) {
             removeProject(projectsData.selectedProject);
             projectsData.deleteProject(projectsData.selectedProject.id);
+            loadInbox(projectsData);
+            loadToday(projectsData);
             selectInboxProject(projectsData);
         }
         else {
@@ -181,7 +186,14 @@ function deleteButtons(projectsData) {
     deletionBtns.forEach(button => {
         button.addEventListener("click", (event) => {
             const itemId = event.target.parentElement.parentElement.parentElement.dataset.id;
-            projectsData.selectedProject.deleteItem(itemId);
+            const itemFolder = projectsData.getProject(projectsData.inbox.getItem(itemId).projectId);
+
+            itemFolder.deleteItem(itemId);
+            projectsData.inbox.deleteItem(itemId);
+            if (isToday(projectsData.selectedProject.getItem(itemId).dueDate)) {
+                projectsData.today.deleteItem(itemId);
+            }
+
             updateSidebarCounters(projectsData);
             deleteItem(projectsData, itemId);
         });
@@ -196,7 +208,8 @@ function loadInbox(projectsData) {
     
     for (const project of projectsData.projects) {
         for (const item of project.todosList) {
-            projectsData.inbox.addItem(item.title, item.description, item.dueDate, item.priority);
+            // Add item with exact same properties
+            projectsData.inbox.addDetailedItem(item.projectId, item.id, item.title, item.description, item.dueDate, item.priority, item.checkList, item.isCompleted);
         }
     }
 
@@ -214,8 +227,9 @@ function loadToday(projectsData) {
 
     for (const project of projectsData.projects) {
         for (const item of project.todosList) {
+            // Add item with exact same properties
             if (isToday(item.dueDate)) {
-                projectsData.today.addItem(item.title, item.description, item.dueDate, item.priority);
+                projectsData.today.addDetailedItem(item.projectId, item.id, item.title, item.description, item.dueDate, item.priority, item.checkList, item.isCompleted);
             }
         }
     }

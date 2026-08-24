@@ -19,9 +19,11 @@ class CheckListItem {
 class TodoItem {
     #isCompleted;
     #id;
+    #projcetId;
 
-    constructor(title, description, dueDate, priority) {
+    constructor(projectId, title, description, dueDate, priority) {
         this.#id = crypto.randomUUID();
+        this.#projcetId = projectId;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
@@ -48,6 +50,21 @@ class TodoItem {
 
     get id() {
         return this.#id;
+    }
+
+    changeData(projectId, id, title, description, dueDate, priority, checkList, isCompleted) {
+        this.#projcetId = projectId;
+        this.#id = id;
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.priority = priority;
+        this.checkList = checkList;
+        this.#isCompleted = isCompleted;
+    }
+
+    get projectId() {
+        return this.#projcetId;
     }
 } 
 

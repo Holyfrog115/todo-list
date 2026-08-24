@@ -11,7 +11,17 @@ class TodoFolder {
     }
 
     addItem(title, description, dueDate, priority) {
-        const item = new TodoItem(title, description, dueDate, priority);
+        const item = new TodoItem(this.#id, title, description, dueDate, priority);
+        this.todosList.push(item);
+        this.todosAmount++;
+        this.#idItem[item.id] = item;
+    }
+
+    addDetailedItem(projectsId, id, title, description, dueDate, priority, checkList, isCompleted) {
+        // Adds items using all properites
+
+        const item = new TodoItem("","","","");
+        item.changeData(projectsId, id, title, description, dueDate, priority, checkList, isCompleted);
         this.todosList.push(item);
         this.todosAmount++;
         this.#idItem[item.id] = item;
