@@ -349,6 +349,38 @@ input[type="search"] {
 
 #header-block {
     margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sort-options {
+    background-color: var(--secondary-clr);
+    border: 2px solid var(--stroke-clr);
+    border-radius: 8px;
+}
+
+.sort-options ul {
+    list-style: none;
+    padding: 2px;
+    display: flex;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.sort-options ul li {
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.sort-options ul li:hover {
+    background-color: var(--main-clr);
+    cursor: pointer;
+}
+
+.sort-options ul li.selected {
+    background-color: var(--main-clr);
+    font-weight: 500;
 }
 
 .tasks-list {
