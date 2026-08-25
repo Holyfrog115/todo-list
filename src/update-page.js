@@ -49,6 +49,16 @@ function updateSidebarCounters(projectsData) {
 }
 
 
+function updateSidebarTitles(projectsData) {
+    const projectsTitles = document.querySelectorAll("#projects-tree .folder-name");
+
+    projectsTitles.forEach(projectTitle => {
+        const title = projectsData.getProject(projectTitle.parentElement.dataset.id).title;
+        projectTitle.textContent = title;
+    });
+}
+
+
 function deleteItem(projectsData, id) {
     const tasks = document.querySelectorAll(".tasks-block li");
 
@@ -63,4 +73,4 @@ function deleteItem(projectsData, id) {
 }
 
 
-export { addNewProject, updateSidebarCounters, removeProject, deleteItem };
+export { addNewProject, updateSidebarCounters, removeProject, deleteItem, updateSidebarTitles };

@@ -109,6 +109,23 @@
         </form>
     </dialog>
 
+    <!-- Rename project form -->
+    <dialog id="rename-project-dialog">
+        <form method="dialog" id="rename-project-form">
+            <h2>New Project's Name</h2>
+            <fieldset>
+                <div>
+                    <label for="projectTitle">Title:</label>
+                    <input type="text" name="projectTitle" id="projectTitle" autocomplete="off" required minlength="2" maxlength="50">
+                </div>
+            </fieldset>
+            <div class="dialog-buttons">
+                <button type="button" value="cancel" formmethod="dialog">Cancel</button>
+                <button id="confirmBtn" value="default">Add</button>
+            </div>
+        </form>
+    </dialog>
+
     <!-- New task form -->
     <dialog id="new-task-dialog">
         <form method="dialog" id="new-task-form">

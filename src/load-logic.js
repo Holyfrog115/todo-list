@@ -1,7 +1,6 @@
-import { addNewProject, updateSidebarCounters, removeProject, deleteItem } from "./update-page.js";
+import { addNewProject, updateSidebarCounters, removeProject, deleteItem, updateSidebarTitles } from "./update-page.js";
 import { loadProject } from "./load-page.js";
 import { isToday } from "date-fns";
-import ProjectsData from "./projects-data.js";
 
 let hidden = false;
 
@@ -12,6 +11,7 @@ function loadLogic(projectsData) {
     selectProjects(projectsData);
     loadMainContentLogic(projectsData);
     selectInboxProject(projectsData);
+    loadRenameProjectForm(projectsData);
 }
 
 // Sidebar
@@ -27,7 +27,6 @@ function loadNewProjectForm(projectsData) {
     const newProjectDialog = document.querySelector("#new-project-dialog");
     const newProjectForm = document.querySelector("#new-project-form");
     const cancelBtn = document.querySelector('#new-project-form button[value="cancel"]');
-    const confirmBtn = document.querySelector("#confirmBtn");
 
     addProjectBtn.addEventListener("click", () => {
         newProjectDialog.showModal();
@@ -48,6 +47,37 @@ function loadNewProjectForm(projectsData) {
         selectProjects(projectsData);
     });
 }
+
+
+function loadRenameProjectForm(projectsData) {
+    const renameProjectBtn = document.querySelector("#rename-project");
+    const renameProjectDialog = document.querySelector("#rename-project-dialog");
+    const renameProjectForm = document.querySelector("#rename-project-form");
+    const cancelBtn = document.querySelector('#rename-project-form button[value="cancel"]');
+    const inputElement = document.querySelector('#rename-project-form input[type="text"]');
+
+    renameProjectBtn.addEventListener("click", () => {
+        renameProjectDialog.showModal();
+        inputElement.value = projectsData.selectedProject.title;
+    });
+
+    cancelBtn.addEventListener("click", (event) => {
+        renameProjectDialog.close();
+        renameProjectForm.reset();
+    });
+
+    renameProjectForm.addEventListener("submit", (event) => {
+        const formData = new FormData(renameProjectForm);
+        const projectTitle = formData.get("projectTitle").trim();
+
+        renameProjectForm.reset();
+        projectsData.selectedProject.title = projectTitle;
+        loadProject(projectsData.selectedProject, projectsData);
+        deleteButtons(projectsData);
+        updateSidebarTitles(projectsData);
+    });
+}
+
 
 function loadHideButton(projectsData) {
     const hideBtn = document.querySelector("#hide-projects");
