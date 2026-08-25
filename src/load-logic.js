@@ -12,6 +12,7 @@ function loadLogic(projectsData) {
     loadMainContentLogic(projectsData);
     selectInboxProject(projectsData);
     loadRenameProjectForm(projectsData);
+    loadSortButtons(projectsData);
 }
 
 // Sidebar
@@ -266,6 +267,36 @@ function loadToday(projectsData) {
 
     const sidebarTasksCounter = document.querySelector("#today-tasks-counter");
     sidebarTasksCounter.textContent = projectsData.today.todosAmount;
+}
+
+
+function loadSortButtons(projectsData) {
+    const sortBtns = document.querySelectorAll(".sort-options li");
+
+    sortBtns.forEach(sortBtn => {
+        sortBtn.addEventListener("click", (event) => {
+            const currentSortBtn = document.querySelector(".sort-options .selected");
+            if (currentSortBtn) {
+                currentSortBtn.classList.remove("selected");
+            }
+            event.target.classList.add("selected");
+
+            switch(event.target.id) {
+                case "due-date":
+                    projectsData.sortMode = 0;
+                    break;
+                case "name":
+                    projectsData.sortMode = 1;
+                    break;
+                case "priority":
+                    projectsData.sortMode = 2;
+                    break;
+                case "project":
+                    projectsData.sortMode = 3;
+                    break;
+            }
+        });
+    });
 }
 
 

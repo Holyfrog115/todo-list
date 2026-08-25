@@ -3,10 +3,12 @@ import TodoFolder from "./todo-folder.js";
 class ProjectsData {
     #idProject = {};
     #selectedProject;
+    #sortMode;
     constructor() {
         this.projects = [];
         this.inbox = new TodoFolder("Inbox");
         this.today = new TodoFolder("Today");
+        this.#sortMode = 0;
         this.#selectedProject = this.inbox;
         this.#idProject[this.inbox.id] = this.inbox;
         this.#idProject[this.today.id] = this.today;
@@ -36,6 +38,15 @@ class ProjectsData {
 
     get selectedProject() {
         return this.#selectedProject;
+    }
+
+    set sortMode(mode) {
+        if (mode < 0 || mode > 3) {
+            return;
+        }
+        else {
+            this.#sortMode = mode;
+        }
     }
 }
 

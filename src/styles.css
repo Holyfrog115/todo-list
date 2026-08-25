@@ -371,6 +371,7 @@ input[type="search"] {
 .sort-options ul li {
     padding: 4px 12px;
     border-radius: 6px;
+    user-select: none;
 }
 
 .sort-options ul li:hover {
