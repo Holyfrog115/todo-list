@@ -77,6 +77,8 @@ h1, h2, h3, h4, h5, h6 {
     --stroke-clr: #E4E4E7;
     --deletion-bg: #EF4444;
     --deletion-bg-hover: #dd3e3e;
+    --rename-bg: #F59E0B;
+    --rename-bg-hover: #e7970d;
 }
 
 body {
@@ -276,7 +278,7 @@ input[type="search"] {
     padding-left: 40px;
 }
 
-#add-task, #delete-project {
+#add-task, #delete-project, #rename-project {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -310,6 +312,22 @@ input[type="search"] {
 
 #delete-project:hover {
     background-color: var(--deletion-bg-hover);
+}
+
+#rename-project {
+    height: 35px;
+    width: 150px;
+    background-color: var(--rename-bg);
+    color: var(--main-clr);
+    fill: var(--main-clr);
+}
+
+#rename-project:hover {
+    background-color: var(--rename-bg-hover);
+}
+
+#rename-project.hidden {
+    display: none;
 }
 
 #delete-project.hidden {

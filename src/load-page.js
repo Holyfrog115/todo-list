@@ -55,14 +55,18 @@ function loadProject(project, projectsData) {
     if (project.title == "Inbox" || project.title == "Today") {
         const addTaskBtn = document.querySelector("#add-task");
         const deleteProjectBtn = document.querySelector("#delete-project");
+        const renameProjectBtn = document.querySelector("#rename-project");
         deleteProjectBtn.classList.add("hidden");
         addTaskBtn.classList.add("hidden");
+        renameProjectBtn.classList.add("hidden");
     }
     else {
         const addTaskBtn = document.querySelector("#add-task");
         const deleteProjectBtn = document.querySelector("#delete-project");
+        const renameProjectBtn = document.querySelector("#rename-project"); 
         deleteProjectBtn.classList.remove("hidden");
         addTaskBtn.classList.remove("hidden");
+        renameProjectBtn.classList.remove("hidden");
     }
 
     const projectTitle = document.querySelector("#header-block h2");
