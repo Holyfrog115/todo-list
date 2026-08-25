@@ -71,6 +71,22 @@ class TodoFolder {
     sortByPriority() {
         this.todosList.sort((a, b) => b.priority - a.priority);
     }
+
+    sortByProject(projectsData) {
+        this.todosList.sort((a, b) => {
+            const aProjectTitle = projectsData.getProject(a.projectId).title;
+            const bProjectTitle = projectsData.getProject(b.projectId).title;
+
+            if (aProjectTitle.toUpperCase() < bProjectTitle.toUpperCase()) {
+                return -1;
+            }
+            if (aProjectTitle.toUpperCase() > bProjectTitle.toUpperCase()) {
+                return 1;
+            }
+
+            return 0;
+        });
+    }
 }
 
 export default TodoFolder;

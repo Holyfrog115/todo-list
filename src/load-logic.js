@@ -309,6 +309,9 @@ function sortProject(project, projectsData) {
         case 2:
             project.sortByPriority();
             break;
+        case 3:
+            project.sortByProject(projectsData);
+            break;
     }   
 }
 
