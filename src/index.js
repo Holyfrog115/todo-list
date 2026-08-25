@@ -1,5 +1,6 @@
 import "./styles.css";
 import "./dialogForms.css";
+import "./task-details.css"
 import ProjectsData from "./projects-data.js";
 import loadPage from "./load-page.js";
 import loadLogic from "./load-logic.js";

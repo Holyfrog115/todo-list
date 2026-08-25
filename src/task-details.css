@@ -1,0 +1,195 @@
+:root {
+    --main-clr: #FFFFFF;
+    --secondary-clr: #F4F4F5;
+    --secondary-clr-dark: #A1A1AA;
+    --secondary-clr-light: #FAFAFA;
+    --third-clr: #4F46E5;
+    --third-clr-hover: #423cc0;
+    --third-clr-transparent: #4F46E50F;
+    --high-priority: #EF4444;
+    --high-priority-bg: #EF444414;
+    --medium-priority: #F59E0B;
+    --medium-priority-bg: #F59E0B14;
+    --low-priority: #10B981;
+    --low-priority-bg: #10B98114;
+    --stroke-clr: #E4E4E7;
+    --deletion-bg: #EF4444;
+    --deletion-bg-hover: #dd3e3e;
+    --rename-bg: #F59E0B;
+    --rename-bg-hover: #e7970d;
+    --description-clr: #52525B;
+}
+
+.task-details {
+    background-color: var(--secondary-clr);
+    height: 100vh;
+    width: 400px;
+    border-left: 1px solid var(--stroke-clr);
+    padding: 16px 20px;
+}
+
+.task-details.hidden {
+    display: none;
+}
+
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.details-header #project-title {
+    font-size: 13px;
+    font-family: "Geist mono";
+    color: var(--third-clr);
+    background-color: var(--third-clr-transparent);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.details-header button {
+    border: none;
+    background-color: transparent;
+    fill: var(--secondary-clr-dark);
+}
+
+.details-header button svg {
+    height: 20px;
+    width: 20px;
+}
+
+.task-main-title {
+    border-bottom: 2px solid var(--stroke-clr);
+    padding: 24px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.task-main-title #task-title {
+    font-size: 20px;
+    line-height: 1.25;
+}
+
+.task-main-title #task-description {
+    color: var(--description-clr);
+    line-height: 1.4;
+    font-size: 14px;
+}
+
+.meta-properties {
+    padding: 24px 0px;
+    border-bottom: 2px solid var(--stroke-clr);
+}
+
+.meta-properties ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.meta-properties li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.meta-properties .property {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.meta-properties svg {
+    fill: var(--secondary-clr-dark);
+    height: 20px;
+    width: 20px;
+}
+
+.meta-properties .property-name {
+    color: var(--description-clr);
+}
+
+.meta-properties #due-date-value {
+    font-family: "Geist mono";
+    color: var(--third-clr);
+}
+
+.meta-properties #priority-value {
+    font-family: "Geist mono";
+    padding: 2px 6px;
+}
+
+.meta-properties #priority-value.high {
+    color: var(--high-priority);
+    background-color: var(--high-priority-bg);
+}
+
+.meta-properties #priority-value.medium {
+    color: var(--medium-priority);
+    background-color: var(--medium-priority-bg);
+}
+
+.meta-properties #priority-value.low {
+    color: var(--low-priority);
+    background-color: var(--low-priority-bg);
+}
+
+.subtask-section {
+    padding: 24px 0px;
+}
+
+.subtask-section #subtask-header {
+    color: var(--secondary-clr-dark);
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.subtask-section ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.subtask-section li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.subtask-section .subtask-title {
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.subtask-section input[type="checkbox"] {
+    height: 16px;
+    width: 16px;
+}
+
+.subtask-section li.completed .subtask-title {
+    text-decoration: line-through;
+    color: var(--secondary-clr-dark);
+}
+
+.add-subtask button {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    border: none;
+    fill: var(--third-clr);
+    color: var(--third-clr);
+    font-size: 14px;
+    font-weight: 500;
+    background-color: transparent;
+}
+
+.add-subtask button svg {
+    height: 16px;
+    width: 16px;
+}
