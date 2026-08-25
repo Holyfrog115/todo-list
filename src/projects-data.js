@@ -48,6 +48,10 @@ class ProjectsData {
             this.#sortMode = mode;
         }
     }
+
+    get sortMode() {
+        return this.#sortMode;
+    }
 }
 
 export default ProjectsData;

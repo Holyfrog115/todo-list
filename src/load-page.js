@@ -1,5 +1,5 @@
 import { format, isToday, isYesterday, isTomorrow } from "date-fns"; 
-import { deleteButtons } from "./load-logic.js";
+import { completeProjectLoad } from "./load-logic.js";
 
 
 function loadPage(projectsData) {
@@ -111,8 +111,7 @@ function addTodoItem(project, item, list, projectsData) {
             projectsData.today.getItem(itemId).changeCompletionStatus();
         }
 
-        loadProject(project, projectsData);
-        deleteButtons(projectsData);
+        completeProjectLoad(project, projectsData);
     });
 
     const todoContainer = document.createElement("div");

@@ -45,14 +45,31 @@ class TodoFolder {
         return this.#idItem[id];
     }
 
-    sortByDueDate() {
-        this.todosList.sort((a, b) => b.dueDate - a.dueDate);
-    }
-
     emptyTodoList() {
         this.todosList = [];
         this.todosAmount = 0;
         this.#idItem = {};
+    }
+
+    sortByDueDate() {
+        this.todosList.sort((a, b) => b.dueDate - a.dueDate);
+    }
+
+    sortByName() {
+        this.todosList.sort((a, b) => {
+            if (a.title.toUpperCase() < b.title.toUpperCase()) {
+                return -1;
+            }
+            if (a.title.toUpperCase() > b.title.toUpperCase()) {
+                return 1;
+            }
+
+            return 0;
+        });
+    }
+
+    sortByPriority() {
+        this.todosList.sort((a, b) => b.priority - a.priority);
     }
 }
 

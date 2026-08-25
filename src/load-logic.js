@@ -73,8 +73,7 @@ function loadRenameProjectForm(projectsData) {
 
         renameProjectForm.reset();
         projectsData.selectedProject.title = projectTitle;
-        loadProject(projectsData.selectedProject, projectsData);
-        deleteButtons(projectsData);
+        completeProjectLoad(projectsData.selectedProject, projectsData);
         updateSidebarTitles(projectsData);
     });
 }
@@ -107,8 +106,7 @@ function selectProjects(projectsData) {
 
             project.classList.add("selected-project");
             projectsData.selectedProject = project.dataset.id;
-            loadProject(projectsData.selectedProject, projectsData);
-            deleteButtons(projectsData);
+            completeProjectLoad(projectsData.selectedProject, projectsData);
         });
     });
 }
@@ -118,8 +116,7 @@ function selectInboxProject(projectsData) {
     const inbox = document.querySelector("#navigation-main li:first-of-type");
     inbox.classList.add("selected-project");
     projectsData.selectedProject = inbox.dataset.id;
-    loadProject(projectsData.inbox, projectsData);
-    deleteButtons(projectsData);
+    completeProjectLoad(projectsData.inbox, projectsData);
 }
 
 
@@ -167,12 +164,11 @@ function addTask(projectsData) {
             projectsData.today.addDetailedItem(projectsData.selectedProject.id, projectsData.selectedProject.todosList.at(-1).id, taskTitle, taskDescription, taskDueDate, taskPriority, [], false);
         }
 
-        projectsData.selectedProject.sortByDueDate();
-        projectsData.inbox.sortByDueDate();
+        sortProject(projectsData.selectedProject, projectsData);
+        sortProject(projectsData.inbox, projectsData);
 
-        loadProject(projectsData.selectedProject, projectsData);
+        completeProjectLoad(projectsData.selectedProject, projectsData);
         updateSidebarCounters(projectsData);
-        deleteButtons(projectsData);
     });
 }
 
@@ -247,7 +243,7 @@ function loadInbox(projectsData) {
     const sidebarTasksCounter = document.querySelector("#inbox-tasks-counter");
     sidebarTasksCounter.textContent = projectsData.inbox.todosAmount;
 
-    projectsData.inbox.sortByDueDate();
+    sortProject(projectsData.inbox, projectsData);
 }
 
 
@@ -295,10 +291,36 @@ function loadSortButtons(projectsData) {
                     projectsData.sortMode = 3;
                     break;
             }
+
+            completeProjectLoad(projectsData.selectedProject, projectsData);
         });
     });
 }
 
 
-export { deleteButtons };
+function sortProject(project, projectsData) {
+    switch(projectsData.sortMode) {
+        case 0:
+            project.sortByDueDate();
+            break;
+        case 1:
+            project.sortByName();
+            break;
+        case 2:
+            project.sortByPriority();
+            break;
+    }   
+}
+
+
+function completeProjectLoad(project, projectsData) {
+    // Loads project and everything it needs to work properly
+
+    sortProject(project, projectsData);
+    loadProject(project, projectsData);
+    deleteButtons(projectsData);
+}
+
+
+export { completeProjectLoad };
 export default loadLogic;
