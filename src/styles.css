@@ -364,12 +364,12 @@ input[type="search"] {
     list-style: none;
     padding: 2px;
     display: flex;
-    gap: 8px;
+    gap: 4px;
     font-size: 14px;
 }
 
 .sort-options ul li {
-    padding: 4px 8px;
+    padding: 4px 12px;
     border-radius: 6px;
 }
 
@@ -400,6 +400,11 @@ input[type="search"] {
 .tasks li:hover {
     border-left: 2px solid var(--third-clr);
     background-color: var(--secondary-clr-light);
+}
+
+#pending-tasks .heading {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .heading {
