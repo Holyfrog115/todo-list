@@ -1,5 +1,5 @@
 import { format, isToday, isYesterday, isTomorrow } from "date-fns"; 
-import { completeProjectLoad } from "./load-logic.js";
+import { completeProjectLoad, openDetailsWindowListener } from "./load-logic.js";
 
 
 function loadPage(projectsData) {
@@ -209,6 +209,7 @@ function addTodoItem(project, item, list, projectsData) {
 
     const itemList = document.createElement("li");
     itemList.dataset.id = item.id;
+    openDetailsWindowListener(itemList);
     itemList.append(leftPart, rightPart);
 
     list.appendChild(itemList);

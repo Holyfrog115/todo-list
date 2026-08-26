@@ -87,7 +87,7 @@ body {
     grid-template-columns: 350px 1fr 400px;
 }
 
-body.hidden {
+body.hidden-side-window {
     grid-template-columns: 350px 1fr;
 }
 

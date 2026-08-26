@@ -13,6 +13,7 @@ function loadLogic(projectsData) {
     selectInboxProject(projectsData);
     loadRenameProjectForm(projectsData);
     loadSortButtons(projectsData);
+    closeDetailsWindow();
 }
 
 // Sidebar
@@ -322,8 +323,66 @@ function completeProjectLoad(project, projectsData) {
     sortProject(project, projectsData);
     loadProject(project, projectsData);
     deleteButtons(projectsData);
+    moreDetailsButtons(projectsData);
 }
 
 
-export { completeProjectLoad };
+function moreDetailsButtons() {
+    // Logic for more details todo item button
+
+    const detailsBtns = document.querySelectorAll(".details-button");
+    detailsBtns.forEach(button => {
+        button.addEventListener("click", () => {
+            const body = document.querySelector("body");
+            body.classList.toggle("hidden-side-window");
+
+            const sideWindow = document.querySelector(".task-details");
+            sideWindow.classList.toggle("hidden");
+        });
+    });
+}
+
+
+function openDetailsWindowListener(item) {
+    item.addEventListener("click", (event) => {
+        if (event.target != item) return;
+
+        const body = document.querySelector("body");
+        body.classList.toggle("hidden-side-window");
+
+        const sideWindow = document.querySelector(".task-details");
+        sideWindow.classList.toggle("hidden");
+    });
+}
+
+
+function closeDetailsWindow() {
+    const closeBtn = document.querySelector(".task-details #close-window");
+
+    closeBtn.addEventListener("click", () => {
+        const body = document.querySelector("body");
+        body.classList.add("hidden-side-window");
+
+        const sideWindow = document.querySelector(".task-details");
+        sideWindow.classList.add("hidden");
+    });
+
+    window.addEventListener("click", (event) => {
+        const condition = !event.target.matches(".more-btn") 
+            && !event.target.matches(".tasks-block li") 
+            && !event.target.matches(".details-button")
+            && !document.querySelector(".task-details").contains(event.target);
+
+        if (condition) {
+            const body = document.querySelector("body");
+            body.classList.add("hidden-side-window");
+
+            const sideWindow = document.querySelector(".task-details");
+            sideWindow.classList.add("hidden");
+        }
+    });
+}
+
+
+export { completeProjectLoad, openDetailsWindowListener };
 export default loadLogic;
