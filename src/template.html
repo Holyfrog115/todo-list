@@ -135,18 +135,6 @@
         <div class="subtask-section">
             <h3 id="subtask-header"></h3>
             <ul>
-                <!-- <li class="subtask completed">
-                    <input type="checkbox" checked>
-                    <h4 class="subtask-title">Draft email launch copy templates</h4>
-                </li>
-                <li class="subtask completed">
-                    <input type="checkbox" checked>
-                    <h4 class="subtask-title">Coordinate layout with team designer</h4>
-                </li>
-                <li class="subtask">
-                    <input type="checkbox">
-                    <h4 class="subtask-title">Send approval link to Sarah & obrtain sign-off</h4>
-                </li> -->
             </ul>
         </div>
         <div class="add-subtask">
@@ -222,6 +210,23 @@
                     <textarea name="taskDescription" id="taskDescription" rows="4" cols="50"></textarea>
                 </div>
 
+            </fieldset>
+            <div class="dialog-buttons">
+                <button type="button" value="cancel" formmethod="dialog">Cancel</button>
+                <button id="confirmBtn" value="default">Add</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- New subtask form -->
+    <dialog id="new-subtask-dialog">
+        <form method="dialog" id="new-subtask-form">
+            <h2>New Subtask</h2>
+            <fieldset>
+                <div>
+                    <label for="subtaskTitle">Title:</label>
+                    <input type="text" name="subtaskTitle" id="subtaskTitle" autocomplete="off" required minlength="2" maxlength="50">
+                </div>
             </fieldset>
             <div class="dialog-buttons">
                 <button type="button" value="cancel" formmethod="dialog">Cancel</button>

@@ -14,6 +14,7 @@ function loadLogic(projectsData) {
     loadRenameProjectForm(projectsData);
     loadSortButtons(projectsData);
     closeDetailsWindow();
+    addCheckListItemBtn(projectsData);
 }
 
 // Sidebar
@@ -344,6 +345,7 @@ function moreDetailsButtons(projectsData) {
                 deselectItems();
                 item.classList.add("selected");
                 loadTaskDetails(item.dataset.id, projectsData);
+                sideWindow.dataset.id = item.dataset.id;
             }
             else {
                 item.classList.remove("selected");
@@ -367,6 +369,7 @@ function openDetailsWindowListener(item, projectsData) {
             deselectItems();
             item.classList.add("selected");
             loadTaskDetails(item.dataset.id, projectsData);
+            sideWindow.dataset.id = item.dataset.id;
         }
         else {
             item.classList.remove("selected");
@@ -400,6 +403,7 @@ function closeDetailsWindow() {
             && !event.target.matches("#tasks-section li") 
             && !event.target.matches(".details-button")
             && !document.querySelector(".task-details").contains(event.target)
+            && !document.querySelector("#new-subtask-dialog .dialog-buttons").contains(event.target)
 
         if (condition) {
             const body = document.querySelector("body");
@@ -410,6 +414,37 @@ function closeDetailsWindow() {
             deselectItems();
         }
     });
+}
+
+
+function addCheckListItemBtn(projectsData) {
+    const addCLItemBtn = document.querySelector("#add-subtask-button");
+    
+    const newSubtaskDialog = document.querySelector("#new-subtask-dialog");
+    const newSubtaskForm = document.querySelector("#new-subtask-form");
+    const cancelBtn = document.querySelector('#new-subtask-form button[value="cancel"]');
+
+    addCLItemBtn.addEventListener("click", () => {
+        newSubtaskDialog.showModal();
+    });
+
+    cancelBtn.addEventListener("click", () => {
+        newSubtaskDialog.close();
+        newSubtaskForm.reset();
+    });
+
+    newSubtaskForm.addEventListener("submit", () => {
+        const formData = new FormData(newSubtaskForm);
+        const subtaskTitle = formData.get("subtaskTitle").trim();
+
+        newSubtaskForm.reset();
+
+        const item = projectsData.selectedProject.getItem(addCLItemBtn.parentElement.parentElement.dataset.id);
+        item.addCheckListItem(subtaskTitle);
+
+        loadTaskDetails(item.id, projectsData);
+    });
+
 }
 
 

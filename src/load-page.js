@@ -254,9 +254,37 @@ function loadTaskDetails(itemId, projectsData) {
             taskPriority.classList.add("none");
     } 
 
-    // TODO Subtasks
     const taskSubtaskHeader = document.querySelector(".task-details #subtask-header");
-    taskSubtaskHeader.textContent = "SUBTASKS 0/0";
+    taskSubtaskHeader.textContent = `SUBTASKS (${item.completedCheckListItems}/${item.checkList.length})`;
+
+    const subtasks = document.querySelector(".task-details .subtask-section ul");
+    subtasks.replaceChildren();
+    for (const subtask of item.checkList) {
+        const li = document.createElement("li");
+        li.classList.add("subtask");
+        if (subtask.isCompleted) {
+            li.classList.add("completed");
+        }
+        li.dataset.id = subtask.id;
+
+        const checkbox = document.createElement("input");
+        checkbox.setAttribute("type", "checkbox");
+        if (li.classList.contains("completed")) {
+            checkbox.checked = true;
+        }
+        checkbox.addEventListener("click", () => {
+            item.changeCheckListItemCompletion(subtask.id);
+            taskSubtaskHeader.textContent = `SUBTASKS (${item.completedCheckListItems}/${item.checkList.length})`;
+            li.classList.toggle("completed");
+        });
+
+        const subtaskTitle = document.createElement("h4");
+        subtaskTitle.classList.add("subtask-title");
+        subtaskTitle.textContent = subtask.title;
+
+        li.append(checkbox, subtaskTitle);
+        subtasks.append(li);
+    }
 }
 
 
