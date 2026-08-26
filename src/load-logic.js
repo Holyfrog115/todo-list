@@ -334,13 +334,20 @@ function moreDetailsButtons(projectsData) {
     detailsBtns.forEach(button => {
         button.addEventListener("click", (event) => {
             const body = document.querySelector("body");
-            body.classList.toggle("hidden-side-window");
+            body.classList.remove("hidden-side-window");
 
             const sideWindow = document.querySelector(".task-details");
-            sideWindow.classList.toggle("hidden");
+            sideWindow.classList.remove("hidden");
 
-            const itemId = event.target.parentElement.parentElement.parentElement.dataset.id;
-            loadTaskDetails(itemId, projectsData);
+            const item = event.target.parentElement.parentElement.parentElement;
+            if (!body.classList.contains("hidden-side-window")) {
+                deselectItems();
+                item.classList.add("selected");
+                loadTaskDetails(item.dataset.id, projectsData);
+            }
+            else {
+                item.classList.remove("selected");
+            } 
         });
     });
 }
@@ -351,12 +358,27 @@ function openDetailsWindowListener(item, projectsData) {
         if (event.target != item) return;
 
         const body = document.querySelector("body");
-        body.classList.toggle("hidden-side-window");
+        body.classList.remove("hidden-side-window");
 
         const sideWindow = document.querySelector(".task-details");
-        sideWindow.classList.toggle("hidden");
+        sideWindow.classList.remove("hidden");
 
-        loadTaskDetails(item.dataset.id, projectsData)
+        if (!body.classList.contains("hidden-side-window")) {
+            deselectItems();
+            item.classList.add("selected");
+            loadTaskDetails(item.dataset.id, projectsData);
+        }
+        else {
+            item.classList.remove("selected");
+        }
+    });
+}
+
+
+function deselectItems() {
+    const selectedItems = document.querySelectorAll("#tasks-section li.selected");
+    selectedItems.forEach(item => {
+        item.classList.remove("selected");
     });
 }
 
@@ -370,13 +392,14 @@ function closeDetailsWindow() {
 
         const sideWindow = document.querySelector(".task-details");
         sideWindow.classList.add("hidden");
+        deselectItems();
     });
 
     window.addEventListener("click", (event) => {
         const condition = !event.target.matches(".more-btn") 
-            && !event.target.matches(".tasks-block li") 
+            && !event.target.matches("#tasks-section li") 
             && !event.target.matches(".details-button")
-            && !document.querySelector(".task-details").contains(event.target);
+            && !document.querySelector(".task-details").contains(event.target)
 
         if (condition) {
             const body = document.querySelector("body");
@@ -384,6 +407,7 @@ function closeDetailsWindow() {
 
             const sideWindow = document.querySelector(".task-details");
             sideWindow.classList.add("hidden");
+            deselectItems();
         }
     });
 }

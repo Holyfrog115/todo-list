@@ -407,6 +407,11 @@ input[type="search"] {
     background-color: var(--secondary-clr-light);
 }
 
+.tasks li.selected {
+    border-left: 2px solid var(--third-clr);
+    background-color: var(--secondary-clr-light);
+}
+
 #pending-tasks .heading {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
