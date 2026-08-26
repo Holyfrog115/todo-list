@@ -209,18 +209,56 @@ function addTodoItem(project, item, list, projectsData) {
 
     const itemList = document.createElement("li");
     itemList.dataset.id = item.id;
-    openDetailsWindowListener(itemList);
+    openDetailsWindowListener(itemList, projectsData);
     itemList.append(leftPart, rightPart);
 
     list.appendChild(itemList);
 }
 
 
-function loadTaskDetails() {
+function loadTaskDetails(itemId, projectsData) {
     // Loads task's details
 
+    const item = projectsData.selectedProject.getItem(itemId);
+
+    const projectTitle = document.querySelector(".task-details #project-title");
+    projectTitle.textContent = projectsData.getProject(item.projectId).title;
+    
+    const taskTitle = document.querySelector(".task-details #task-title");
+    taskTitle.textContent = item.title;
+
+    const taskDescription = document.querySelector(".task-details #task-description");
+    taskDescription.textContent = item.description;
+
+    const taskdueDate = document.querySelector(".task-details #due-date-value");
+    taskdueDate.textContent = format(item.dueDate, "yyyy/MM/dd");
+
+    const taskPriority = document.querySelector(".task-details #priority-value");
+    taskPriority.classList.remove("high", "medium", "low", "none");
+
+    switch (item.priority) {
+        case 3:
+            taskPriority.textContent = "HIGH";
+            taskPriority.classList.add("high");
+            break;
+        case 2:
+            taskPriority.textContent = "MED";
+            taskPriority.classList.add("medium");
+            break;
+        case 1:
+            taskPriority.textContent = "LOW";
+            taskPriority.classList.add("low");
+            break;
+        default:
+            taskPriority.textContent = "NONE";
+            taskPriority.classList.add("none");
+    } 
+
+    // TODO Subtasks
+    const taskSubtaskHeader = document.querySelector(".task-details #subtask-header");
+    taskSubtaskHeader.textContent = "SUBTASKS 0/0";
 }
 
 
-export { loadProject };
+export { loadProject, loadTaskDetails };
 export default loadPage;

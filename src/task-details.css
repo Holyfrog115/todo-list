@@ -138,6 +138,11 @@
     background-color: var(--low-priority-bg);
 }
 
+.meta-properties #priority-value.none {
+    color: var(--third-clr);
+    background-color: var(--third-clr-transparent);
+}
+
 .subtask-section {
     padding: 24px 0px;
 }

@@ -1,5 +1,5 @@
 import { addNewProject, updateSidebarCounters, removeProject, deleteItem, updateSidebarTitles } from "./update-page.js";
-import { loadProject } from "./load-page.js";
+import { loadProject, loadTaskDetails } from "./load-page.js";
 import { isToday } from "date-fns";
 
 let hidden = false;
@@ -327,23 +327,26 @@ function completeProjectLoad(project, projectsData) {
 }
 
 
-function moreDetailsButtons() {
+function moreDetailsButtons(projectsData) {
     // Logic for more details todo item button
 
     const detailsBtns = document.querySelectorAll(".details-button");
     detailsBtns.forEach(button => {
-        button.addEventListener("click", () => {
+        button.addEventListener("click", (event) => {
             const body = document.querySelector("body");
             body.classList.toggle("hidden-side-window");
 
             const sideWindow = document.querySelector(".task-details");
             sideWindow.classList.toggle("hidden");
+
+            const itemId = event.target.parentElement.parentElement.parentElement.dataset.id;
+            loadTaskDetails(itemId, projectsData);
         });
     });
 }
 
 
-function openDetailsWindowListener(item) {
+function openDetailsWindowListener(item, projectsData) {
     item.addEventListener("click", (event) => {
         if (event.target != item) return;
 
@@ -352,6 +355,8 @@ function openDetailsWindowListener(item) {
 
         const sideWindow = document.querySelector(".task-details");
         sideWindow.classList.toggle("hidden");
+
+        loadTaskDetails(item.dataset.id, projectsData)
     });
 }
 
