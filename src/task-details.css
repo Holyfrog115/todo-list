@@ -159,6 +159,9 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    height: calc(100vh - 350px);
+    overflow-y: auto;
+    scrollbar-width: thin;
 }
 
 .subtask-section li {
@@ -182,19 +185,22 @@
     color: var(--secondary-clr-dark);
 }
 
-.add-subtask button {
+.subtask-header-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#add-subtask-button {
     display: flex;
     gap: 8px;
     align-items: center;
     border: none;
-    fill: var(--third-clr);
-    color: var(--third-clr);
+    border-radius: 50%;
+    fill: var(--main-clr);
     font-size: 14px;
     font-weight: 500;
-    background-color: transparent;
-}
-
-.add-subtask button svg {
-    height: 16px;
-    width: 16px;
+    background-color: var(--third-clr);
+    height: 24px;
+    width: 24px;
 }

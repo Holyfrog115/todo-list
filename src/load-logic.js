@@ -510,7 +510,6 @@ function closeDetailsWindow(projectsData) {
 
 function addCheckListItemBtn(projectsData) {
     const addCLItemBtn = document.querySelector("#add-subtask-button");
-    
     const newSubtaskDialog = document.querySelector("#new-subtask-dialog");
     const newSubtaskForm = document.querySelector("#new-subtask-form");
     const cancelBtn = document.querySelector('#new-subtask-form button[value="cancel"]');
@@ -530,7 +529,7 @@ function addCheckListItemBtn(projectsData) {
 
         newSubtaskForm.reset();
 
-        const item = projectsData.selectedProject.getItem(addCLItemBtn.parentElement.parentElement.dataset.id);
+        const item = projectsData.selectedProject.getItem(addCLItemBtn.parentElement.parentElement.parentElement.dataset.id);
         item.addCheckListItem(subtaskTitle);
 
         loadTaskDetails(item.id, projectsData);

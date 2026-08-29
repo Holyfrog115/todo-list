@@ -345,6 +345,12 @@ input[type="search"] {
     padding: 16px 32px;
 }
 
+.tasks-block {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    height: calc(100vh - 180px);
+}
+
 #active-items {
     font-size: 13px;
     color: var(--secondary-clr-dark);
