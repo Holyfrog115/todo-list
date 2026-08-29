@@ -439,7 +439,7 @@ function openDetailsWindowListener(item, projectsData) {
 
 
 function deselectItems() {
-    const selectedItems = document.querySelectorAll("#tasks-section li.selected");
+    const selectedItems = document.querySelectorAll("#tasks-block li.selected");
     selectedItems.forEach(item => {
         item.classList.remove("selected");
     });
