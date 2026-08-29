@@ -558,6 +558,9 @@ input[type="search"] {
     border: none;
     color: var(--main-clr);
     height: 35px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 
 .more-options-menu button:hover {

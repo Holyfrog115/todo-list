@@ -1,6 +1,6 @@
 import { addNewProject, updateSidebarCounters, removeProject, deleteItem, updateSidebarTitles } from "./update-page.js";
 import { loadProject, loadTaskDetails } from "./load-page.js";
-import { isToday } from "date-fns";
+import { format, isToday } from "date-fns";
 
 let hidden = false;
 
@@ -8,13 +8,8 @@ function loadLogic(projectsData) {
     loadInbox(projectsData);
     loadToday(projectsData);
     loadSidebarLogic(projectsData);
-    selectProjects(projectsData);
     loadMainContentLogic(projectsData);
-    selectInboxProject(projectsData);
-    loadRenameProjectForm(projectsData);
-    loadSortButtons(projectsData);
-    closeDetailsWindow();
-    addCheckListItemBtn(projectsData);
+    loadDetailsWindowLogic(projectsData);
 }
 
 // Sidebar
@@ -128,6 +123,11 @@ function loadMainContentLogic(projectsData) {
     addTask(projectsData);
     projectDeletion(projectsData);
     deselectMoreOptions();
+    selectProjects(projectsData);
+    selectInboxProject(projectsData);
+    loadRenameProjectForm(projectsData);
+    loadSortButtons(projectsData);
+    editTask(projectsData);
 }
 
 
@@ -171,6 +171,56 @@ function addTask(projectsData) {
 
         completeProjectLoad(projectsData.selectedProject, projectsData);
         updateSidebarCounters(projectsData);
+    });
+}
+
+
+function editTask(projectsData) {
+    const editTaskBtns = document.querySelectorAll(".edit-button");
+    const editTaskDialog = document.querySelector("#edit-task-dialog");
+    const editTaskForm = document.querySelector("#edit-task-form");
+    const cancelBtn = document.querySelector('#edit-task-form button[value="cancel"]');
+
+    editTaskBtns.forEach(editTaskBtn => {
+        editTaskBtn.addEventListener("click", (event) => {
+            editTaskDialog.showModal();
+
+            const itemId = event.target.parentElement.parentElement.parentElement.dataset.id;
+            editTaskDialog.dataset.id = itemId;
+            const item = projectsData.selectedProject.getItem(itemId);
+            const taskTitle = document.querySelector("#edit-task-form #taskTitle");
+            const taskDueDate = document.querySelector("#edit-task-form #taskDueDate");
+            const taskPriority = document.querySelector("#edit-task-form #taskPriority");
+            const taskDescription = document.querySelector("#edit-task-form #taskDescription");
+
+            taskTitle.value = item.title;
+            taskDueDate.value = format(item.dueDate, "yyyy-MM-dd");
+            taskPriority.value = item.priority;
+            taskDescription.value = item.description;
+        });
+    });
+
+    cancelBtn.addEventListener("click", (event) => {
+        editTaskDialog.close();
+    });
+
+    editTaskForm.addEventListener("submit", (event) => {
+        const formData = new FormData(editTaskForm);
+        const taskTitle = formData.get("taskTitle").trim();
+        const taskDueDate = new Date(formData.get("taskDueDate"));
+        const taskPriority = +formData.get("taskPriority");
+        const taskDescription = formData.get("taskDescription");
+
+        const item = projectsData.selectedProject.getItem(editTaskDialog.dataset.id);
+        item.title = taskTitle;
+        item.dueDate = taskDueDate;
+        item.priority = taskPriority;
+        item.description = taskDescription;
+        
+        sortProject(projectsData.selectedProject, projectsData);
+        sortProject(projectsData.inbox, projectsData);
+
+        completeProjectLoad(projectsData.selectedProject, projectsData);
     });
 }
 
@@ -324,6 +374,7 @@ function completeProjectLoad(project, projectsData) {
     sortProject(project, projectsData);
     loadProject(project, projectsData);
     deleteButtons(projectsData);
+    editTask(projectsData);
     moreDetailsButtons(projectsData);
 }
 
@@ -352,6 +403,15 @@ function moreDetailsButtons(projectsData) {
             } 
         });
     });
+}
+
+
+// Details window
+
+
+function loadDetailsWindowLogic(projectsData) {
+    closeDetailsWindow();
+    addCheckListItemBtn(projectsData);
 }
 
 
