@@ -543,7 +543,6 @@ input[type="search"] {
     display: none;
     flex-direction: column;
     align-items: center;
-    /* gap: 8px; */
     z-index: 1;
 }
 
@@ -553,7 +552,7 @@ input[type="search"] {
 
 .more-options-menu button {
     font-size: 16px;
-    width: 120px;
+    width: 140px;
     background-color: transparent;
     border: none;
     color: var(--main-clr);
@@ -561,6 +560,14 @@ input[type="search"] {
     display: flex;
     justify-content: start;
     align-items: center;
+    gap: 6px;
+}
+
+.more-options-menu button svg {
+    fill: var(--main-clr);
+    pointer-events: none;
+    height: 24px;
+    width: 24px;
 }
 
 .more-options-menu button:hover {
