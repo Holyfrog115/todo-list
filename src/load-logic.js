@@ -465,8 +465,20 @@ function closeDetailsWindow(projectsData) {
         const condition = !event.target.matches(".more-btn") 
             && !event.target.matches("#tasks-section li") 
             && !event.target.matches(".details-button")
+            && !event.target.matches(".edit-button")
+            && !event.target.matches("#delete-project")
+            && !event.target.matches("#rename-project")
+            && !event.target.matches("add-task")
+            && !event.target.matches('button[value="cancel"]')
             && !document.querySelector(".task-details").contains(event.target)
             && !document.querySelector("#new-subtask-dialog .dialog-buttons").contains(event.target)
+            && !document.querySelector("#pending-tasks ul").contains(event.target)
+            && !document.querySelector("#completed-tasks ul").contains(event.target)
+            && !document.querySelector("#new-project-dialog").open
+            && !document.querySelector("#rename-project-dialog").open
+            && !document.querySelector("#new-task-dialog").open
+            && !document.querySelector("#edit-task-dialog").open
+            && !document.querySelector("#new-subtask-dialog").open;
 
         if (condition) {
             const body = document.querySelector("body");
