@@ -4,6 +4,12 @@ A web version of todo list app featuring todo project folders, todo data details
 
 [Live Demo](https://holyfrog115.github.io/todo-list/)
 
+## Learning Objectives
+
+- Work with npm packets
+- Make structured project with modules
+- Use in practice SOLID principles
+
 ## Features
 
 ### Project folders
@@ -30,9 +36,3 @@ Search for required todo item by typing its title in search bar.
 
 <img width="1914" height="865" alt="searching" src="https://github.com/user-attachments/assets/b11448c9-4e16-4cce-8dd2-1385746663d9" />
 
-
-## Learning Objectives
-
-- Work with npm packets
-- Make structured project with modules
-- Use in practice SOLID principles
