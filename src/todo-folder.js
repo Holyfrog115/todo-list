@@ -3,11 +3,15 @@ import TodoItem from "./todo-item.js";
 class TodoFolder {
     #id;
     #idItem = {};
+    #isSearching;
     constructor(title) {
         this.#id = crypto.randomUUID();
         this.title = title;
         this.todosList = [];
+        this.searchedTodos = [];
+        this.#isSearching = false;
         this.todosAmount = 0;
+        this.searchedTodosAmount = 0;
     }
 
     addItem(title, description, dueDate, priority) {
@@ -86,6 +90,24 @@ class TodoFolder {
 
             return 0;
         });
+    }
+
+    get isSearching() {
+        return this.#isSearching;
+    }
+
+    searchTodos(search) {
+        this.searchingTodos = this.todosList.filter(item => item.title.toLowerCase().includes(search));
+        this.searchedTodosAmount = this.searchingTodos.length;
+    }    
+
+    startSearch(search) {
+        this.#isSearching = true;
+        this.searchTodos(search);
+    }
+
+    stopSearching() {
+        this.#isSearching = false;
     }
 }
 

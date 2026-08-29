@@ -73,14 +73,21 @@ function loadProject(project, projectsData) {
     projectTitle.textContent = project.title;
 
     const activeItems = document.querySelector("#active-items");
-    activeItems.textContent = `Showing ${project.todosAmount} active items`
+    if (project.isSearching) {
+        activeItems.textContent = `Showing ${project.searchedTodosAmount} items out of ${project.todosAmount} total`;
+    }
+    else {
+        activeItems.textContent = `Showing ${project.todosAmount} active items`;
+    }
 
     const pendingTasks = document.querySelector("#pending-tasks ul");
     pendingTasks.replaceChildren();
     const completedTasks = document.querySelector("#completed-tasks ul")
     completedTasks.replaceChildren();
+
+    const todos = project.isSearching ? project.searchingTodos : project.todosList;
     
-    for (const item of project.todosList) {
+    for (const item of todos) {
         if (item.isCompleted) {
             addTodoItem(project, item, completedTasks, projectsData);
         }

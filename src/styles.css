@@ -271,7 +271,6 @@ nav ul {
 }
 
 input[type="search"] {
-    color: var(--secondary-clr-dark);
     border: 1px solid var(--secondary-clr-dark);
     border-radius: 4px;
     height: 35px;

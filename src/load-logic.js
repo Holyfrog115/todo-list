@@ -128,6 +128,22 @@ function loadMainContentLogic(projectsData) {
     loadRenameProjectForm(projectsData);
     loadSortButtons(projectsData);
     editTask(projectsData);
+    searchItems(projectsData);
+}
+
+
+function searchItems(projectsData) {
+    const searchBar = document.querySelector('input[type="search"]');
+
+    searchBar.addEventListener("input", (event) => {
+        if (searchBar.value != "") {
+            projectsData.selectedProject.startSearch(searchBar.value);
+        }
+        else {
+            projectsData.selectedProject.stopSearching();
+        }
+        loadProject(projectsData.selectedProject, projectsData);
+    });
 }
 
 
