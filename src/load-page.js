@@ -188,11 +188,15 @@ function addTodoItem(project, item, list, projectsData) {
     detailsBtn.classList.add("details-button");
     detailsBtn.textContent = "More Details";
 
+    const editBtn = document.createElement("button");
+    editBtn.classList.add("edit-button");
+    editBtn.textContent = "Edit Task";
+
     const deletionBtn = document.createElement("button");
     deletionBtn.classList.add("deletion-button");
     deletionBtn.textContent = "Delete Item";
 
-    moreOptionsMenu.append(detailsBtn, deletionBtn);
+    moreOptionsMenu.append(detailsBtn, editBtn, deletionBtn);
 
     moreBtn.addEventListener("click", (event) => {
         const moreOptions = event.target.parentElement.querySelector(".more-options-menu");
