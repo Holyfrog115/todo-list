@@ -58,7 +58,16 @@ class TodoItem {
     }
 
     deleteCheckListItem(id) {
-        this.checkList.splice(id, 1);
+        for (let i = 0; i < this.checkList.length; i++) {
+            if (this.checkList[i].id == id) {
+                if (this.checkList[i].isCompleted) {
+                    this.#completedCheckListItems--;
+                }
+                this.checkList.splice(i, 1);
+                break;
+            }
+        }
+        
     }
 
     get id() {

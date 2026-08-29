@@ -486,6 +486,7 @@ function closeDetailsWindow(projectsData) {
             && !event.target.matches("#rename-project")
             && !event.target.matches("add-task")
             && !event.target.matches('button[value="cancel"]')
+            && !event.target.matches('.delete-subtask-btn')
             && !document.querySelector(".task-details").contains(event.target)
             && !document.querySelector("#new-subtask-dialog .dialog-buttons").contains(event.target)
             && !document.querySelector("#pending-tasks ul").contains(event.target)
@@ -534,7 +535,6 @@ function addCheckListItemBtn(projectsData) {
 
         loadTaskDetails(item.id, projectsData);
     });
-
 }
 
 

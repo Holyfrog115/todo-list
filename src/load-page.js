@@ -296,7 +296,18 @@ function loadTaskDetails(itemId, projectsData) {
         subtaskTitle.classList.add("subtask-title");
         subtaskTitle.textContent = subtask.title;
 
-        li.append(checkbox, subtaskTitle);
+        const deletionBtn = document.createElement("button");
+        deletionBtn.classList.add("delete-subtask-btn");
+        deletionBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>`;
+        deletionBtn.addEventListener("click", (event) => {
+            const subtaskId = event.target.parentElement.dataset.id;
+            const itemId = event.target.parentElement.parentElement.parentElement.parentElement.dataset.id;
+            const item = projectsData.selectedProject.getItem(itemId);
+            item.deleteCheckListItem(subtaskId);
+            loadTaskDetails(itemId, projectsData);
+        });
+
+        li.append(checkbox, subtaskTitle, deletionBtn);
         subtasks.append(li);
     }
 }

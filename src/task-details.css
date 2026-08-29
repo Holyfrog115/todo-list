@@ -165,9 +165,25 @@
 }
 
 .subtask-section li {
-    display: flex;
+    display: grid;
     align-items: center;
     gap: 8px;
+    grid-template-columns: 16px 1fr 30px;
+}
+
+.delete-subtask-btn {
+    background-color: transparent;
+    border: none;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-subtask-btn svg {
+    fill: var(--deletion-bg);
+    pointer-events: none;
 }
 
 .subtask-section .subtask-title {
