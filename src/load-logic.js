@@ -379,6 +379,15 @@ function completeProjectLoad(project, projectsData) {
 }
 
 
+// Details window
+
+
+function loadDetailsWindowLogic(projectsData) {
+    closeDetailsWindow(projectsData);
+    addCheckListItemBtn(projectsData);
+}
+
+
 function moreDetailsButtons(projectsData) {
     // Logic for more details todo item button
 
@@ -393,8 +402,9 @@ function moreDetailsButtons(projectsData) {
 
             const item = event.target.parentElement.parentElement.parentElement;
             if (!body.classList.contains("hidden-side-window")) {
-                deselectItems();
+                deselectItems(projectsData);
                 item.classList.add("selected");
+                projectsData.selectedProject.getItem(item.dataset.id).select();
                 loadTaskDetails(item.dataset.id, projectsData);
                 sideWindow.dataset.id = item.dataset.id;
             }
@@ -403,15 +413,6 @@ function moreDetailsButtons(projectsData) {
             } 
         });
     });
-}
-
-
-// Details window
-
-
-function loadDetailsWindowLogic(projectsData) {
-    closeDetailsWindow();
-    addCheckListItemBtn(projectsData);
 }
 
 
@@ -426,8 +427,9 @@ function openDetailsWindowListener(item, projectsData) {
         sideWindow.classList.remove("hidden");
 
         if (!body.classList.contains("hidden-side-window")) {
-            deselectItems();
+            deselectItems(projectsData);
             item.classList.add("selected");
+            projectsData.selectedProject.getItem(item.dataset.id).select();
             loadTaskDetails(item.dataset.id, projectsData);
             sideWindow.dataset.id = item.dataset.id;
         }
@@ -438,15 +440,16 @@ function openDetailsWindowListener(item, projectsData) {
 }
 
 
-function deselectItems() {
-    const selectedItems = document.querySelectorAll("#tasks-block li.selected");
+function deselectItems(projectsData) {
+    const selectedItems = document.querySelectorAll(".tasks-block li.selected");
     selectedItems.forEach(item => {
+        projectsData.selectedProject.getItem(item.dataset.id).deselect();
         item.classList.remove("selected");
     });
 }
 
 
-function closeDetailsWindow() {
+function closeDetailsWindow(projectsData) {
     const closeBtn = document.querySelector(".task-details #close-window");
 
     closeBtn.addEventListener("click", () => {
@@ -455,7 +458,7 @@ function closeDetailsWindow() {
 
         const sideWindow = document.querySelector(".task-details");
         sideWindow.classList.add("hidden");
-        deselectItems();
+        deselectItems(projectsData);
     });
 
     window.addEventListener("click", (event) => {
@@ -471,7 +474,7 @@ function closeDetailsWindow() {
 
             const sideWindow = document.querySelector(".task-details");
             sideWindow.classList.add("hidden");
-            deselectItems();
+            deselectItems(projectsData);
         }
     });
 }

@@ -214,6 +214,9 @@ function addTodoItem(project, item, list, projectsData) {
     const itemList = document.createElement("li");
     itemList.dataset.id = item.id;
     openDetailsWindowListener(itemList, projectsData);
+    if (item.isSelected) {
+        itemList.classList.add("selected");
+    }
     itemList.append(leftPart, rightPart);
 
     list.appendChild(itemList);

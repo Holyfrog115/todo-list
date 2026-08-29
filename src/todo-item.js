@@ -28,6 +28,7 @@ class TodoItem {
     #projcetId;
     #completedCheckListItems;
     #idCheckList = {};
+    #isSelected;
 
     constructor(projectId, title, description, dueDate, priority) {
         this.#id = crypto.randomUUID();
@@ -39,6 +40,7 @@ class TodoItem {
         this.checkList = [];
         this.#completedCheckListItems = 0;
         this.#isCompleted = false;
+        this.#isSelected = false;
     }
 
     changeCompletionStatus() {
@@ -91,6 +93,18 @@ class TodoItem {
         else {
             this.#completedCheckListItems--;
         }
+    }
+
+    get isSelected() {
+        return this.#isSelected;
+    }
+
+    select() {
+        this.#isSelected = true;
+    }
+
+    deselect() {
+        this.#isSelected = false;
     }
 } 
 
